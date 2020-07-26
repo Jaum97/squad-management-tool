@@ -1,13 +1,13 @@
 import { createElement } from 'react'
 
 import CreateTeamContainer from '../views/CreateTeam'
-import MyTeam from '../views/MyTeam'
+import MyTeams from '../views/MyTeams'
 import { routesEnum } from './enum'
 import { IRouteData } from './types'
 
 export const routesData: IRouteData[] = [
 	{
-		children: createElement(MyTeam),
+		children: createElement(MyTeams),
 		displayOnNavBar: true,
 		exact: true,
 		isPrivate: false,

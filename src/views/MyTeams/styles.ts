@@ -1,10 +1,7 @@
 import styled from 'styled-components'
 
 export const Content = styled.div`
-	/* padding: 24px; */
-	/* width: 100%; */
 	display: flex;
-	/* padding-top: 80px; */
 	@media (max-width: 800px) {
 		flex-direction: column;
 	}
@@ -113,6 +110,8 @@ export const GradientSectionContainer = styled(SectionContainer)`
 
 export const LeftSide = styled.div`
 	width: 50%;
+	flex-direction: column;
+	display: flex;
 	border-right: 1px solid #949494;
 `
 
@@ -130,14 +129,15 @@ export const CircleOutline = styled.div`
 
 export const RightSide = styled.div`
 	width: 50%;
+	display: flex;
 `
 
 export const Player = styled.div`
 	display: flex;
-	/* width: 100%; */
 	flex-direction: column;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
+	position: relative;
 	margin: 40px;
 `
 
@@ -147,8 +147,22 @@ export const AvatarContainer = styled.div`
 	align-items: center;
 	justify-content: center;
 	border-radius: 50%;
-	width: 156px;
-	height: 156px;
+	width: 148px;
+	height: 148px;
+`
+
+export const BadgeContainer = styled.div`
+	border-bottom: 1px solid white;
+	position: absolute;
+	top: 25%;
+	width: 48px;
+	right: 0;
+`
+
+export const PercentageBadge = styled.span`
+	color: white;
+	font-size: 18px;
+	font-weight: 700;
 `
 
 export const MPPContainer = styled.div`
@@ -158,8 +172,8 @@ export const MPPContainer = styled.div`
 	border: 2px dashed #9c9998;
 	border-radius: 50%;
 	border-width: 2px;
-	height: 164px;
-	width: 164px;
+	height: 156px;
+	width: 156px;
 	filter: drop-shadow(10px 10px 10px #520cab)
 		drop-shadow(-10px -10px 10px #520cab);
 `

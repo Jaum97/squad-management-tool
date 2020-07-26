@@ -1,24 +1,32 @@
+import cogoToast from 'cogo-toast'
 import React, { useState } from 'react'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import { MOCKED_DATA } from './data'
 import {
-	TableWrapper,
-	TableHeader,
+	CellContentWrapper,
+	CellIcon,
+	CellToolTip,
+	HeaderContentWrapper,
 	TableBody,
 	TableBodyRow,
 	TableCell,
-	HeaderContentWrapper,
+	TableHeader,
 	TableHeaderRow,
-	CellContentWrapper,
-	CellIcon,
-	CellToolTip
+	TableWrapper
 } from './styles'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import cogoToast from 'cogo-toast'
-import { MOCKED_DATA } from './data'
+import { ISortBy } from './types'
 
 const cogoOpts = { position: 'top-right' as 'top-right' }
 
 function TeamTable(): JSX.Element {
-	const [sortBy, setSortBy] = useState({ header: 'name', order: 'asc' })
+	const DEFAULT_SORTING: ISortBy = {
+		header: 'name',
+		order: 'asc'
+	}
+
+	const [sortBy, setSortBy] = useState(DEFAULT_SORTING)
 	const [list, setList] = useState(MOCKED_DATA)
 
 	const sortFn = (a: any, b: any) => {
@@ -30,7 +38,7 @@ function TeamTable(): JSX.Element {
 		return first[header].localeCompare(second[header])
 	}
 
-	const sortRowsBy = (field: string) => () => {
+	const sortRowsBy = (field: ISortBy['header']) => () => {
 		const { header, order: oldOrder } = sortBy
 
 		const shouldChangeOrder = header === field
@@ -46,7 +54,7 @@ function TeamTable(): JSX.Element {
 		setSortBy({ header: field, order: 'asc' })
 	}
 
-	const getIcon = (field: string) => {
+	const getIcon = (field: ISortBy['header']) => {
 		const { header, order } = sortBy
 
 		const isBeignSorted = header === field
@@ -72,13 +80,13 @@ function TeamTable(): JSX.Element {
 				<TableHeaderRow>
 					<TableHeader onClick={sortRowsBy('name')}>
 						<HeaderContentWrapper>
-							Name
+							{'Name'}
 							<FontAwesomeIcon icon={getIcon('name')} />
 						</HeaderContentWrapper>
 					</TableHeader>
 					<TableHeader onClick={sortRowsBy('description')}>
 						<HeaderContentWrapper>
-							Description
+							{'Description'}
 							<FontAwesomeIcon icon={getIcon('description')} />
 						</HeaderContentWrapper>
 					</TableHeader>

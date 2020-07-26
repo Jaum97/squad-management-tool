@@ -1,13 +1,14 @@
 import React from 'react'
-import {
-	ListWrapper,
-	ListTitle,
-	ListItem,
-	UnorderedList,
-	ItemName,
-	ItemValue
-} from './styles'
+
 import { MOCKED_LIST } from './data'
+import {
+	ItemName,
+	ItemValue,
+	ListItem,
+	ListTitle,
+	ListWrapper,
+	UnorderedList
+} from './styles'
 
 // import IProps from './types'
 

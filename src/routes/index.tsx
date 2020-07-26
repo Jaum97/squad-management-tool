@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 
-import { FullScreen } from '../styles/defaults'
+import Page from '../components/Page'
 import { routesData } from './data'
 import { routesEnum } from './enum'
 
@@ -11,7 +11,7 @@ function Routes(): JSX.Element {
 			<Switch>
 				{routesData.map(({ children, ...rest }) => (
 					<Route {...rest}>
-						<FullScreen>{children}</FullScreen>
+						<Page>{children}</Page>
 					</Route>
 				))}
 				<Redirect from={'*'} to={routesEnum.MY_TEAMS} />

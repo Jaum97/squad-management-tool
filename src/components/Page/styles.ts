@@ -8,6 +8,7 @@ export const Main = styled.main`
 	top: 78px;
 	right: 0;
 	left: 0;
+	background-color: #f9f9f9;
 	/* width: 100%; */
 `
 

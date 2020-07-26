@@ -18,9 +18,9 @@ export const ListItem = styled.div`
 	list-style-type: none;
 	margin-bottom: 4px;
 	padding: 12px 16px;
-    &:last-child {
-        margin-bottom: 0px;
-    }
+	&:last-child {
+		margin-bottom: 0px;
+	}
 `
 
 export const UnorderedList = styled.div`

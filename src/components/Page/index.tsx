@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
+
 import Header from '../header'
-import { Main, Footer } from './styles'
+import { Footer, Main } from './styles'
 
 function Page({ children }: any) {
 	return (

@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 
 export const ResetDefaultStyles = createGlobalStyle`
 html,
@@ -14,9 +14,4 @@ body {
   * {
     outline: 0;
   }
-`
-export const FullScreen = styled.div`
-	height: 100vh;
-	width: 100vw;
-	background-color: #f9f9f9;
 `

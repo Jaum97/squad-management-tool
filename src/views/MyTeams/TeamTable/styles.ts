@@ -1,6 +1,7 @@
-import styled from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ReactTooltip from 'react-tooltip'
+import styled from 'styled-components'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const TableWrapper = styled.table`
 	border-collapse: collapse;

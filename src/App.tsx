@@ -1,24 +1,23 @@
+import { configure } from 'axios-hooks'
 import React, { StrictMode } from 'react'
+import { ConfigProvider } from 'react-avatar'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+	faPencilAlt,
+	faShareAlt,
+	faSort,
+	faSortDown,
+	faSortUp,
+	faTrash
+} from '@fortawesome/free-solid-svg-icons'
+
+import { axiosInstance, cacheInstance } from './config/axios'
 import Routes from './routes'
 import { persistor, store } from './store'
 import { ResetDefaultStyles } from './styles/defaults'
-import { configure } from 'axios-hooks'
-import { axiosInstance, cacheInstance } from './config/axios'
-
-import { library } from '@fortawesome/fontawesome-svg-core'
-import {
-	faSort,
-	faSortUp,
-	faSortDown,
-	faPencilAlt,
-	faTrash,
-	faShareAlt
-} from '@fortawesome/free-solid-svg-icons'
-
-import { ConfigProvider } from 'react-avatar'
 
 library.add(faSort, faSortUp, faSortDown, faPencilAlt, faTrash, faShareAlt)
 
