@@ -9,7 +9,7 @@ body {
 	overflow-x: hidden;
 	padding: 0px;
 	width: 100%;
-  font-family:  'Bahij_SultanNahia', sans-serif;
+  	font-family:  'Bahij_SultanNahia', sans-serif;
 }
   * {
     outline: 0;

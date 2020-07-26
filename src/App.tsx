@@ -18,17 +18,23 @@ import {
 	faShareAlt
 } from '@fortawesome/free-solid-svg-icons'
 
+import { ConfigProvider } from 'react-avatar'
+
 library.add(faSort, faSortUp, faSortDown, faPencilAlt, faTrash, faShareAlt)
 
 function App(): JSX.Element {
 	configure({ axios: axiosInstance, cache: cacheInstance })
+
+	const avatarColors = ['#c9c9c9', '#c9c9c9', '#c9c9c9']
 
 	return (
 		<StrictMode>
 			<ResetDefaultStyles />
 			<Provider store={store}>
 				<PersistGate persistor={persistor}>
-					<Routes />
+					<ConfigProvider colors={avatarColors}>
+						<Routes />
+					</ConfigProvider>
 				</PersistGate>
 			</Provider>
 		</StrictMode>

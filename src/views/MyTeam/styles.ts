@@ -1,9 +1,13 @@
 import styled from 'styled-components'
 
-export const Page = styled.div`
-	padding: 24px;
+export const Content = styled.div`
+	/* padding: 24px; */
+	/* width: 100%; */
 	display: flex;
-	/* flex-direction: row; */
+	/* padding-top: 80px; */
+	@media (max-width: 800px) {
+		flex-direction: column;
+	}
 `
 
 export const TransparentWrapper = styled.div`
@@ -13,6 +17,9 @@ export const TransparentWrapper = styled.div`
 	justify-content: flex-start;
 	padding: 16px;
 	width: 50%;
+	@media (max-width: 800px) {
+		width: 100%;
+	}
 `
 
 export const WrapperLeft = styled(TransparentWrapper)`
@@ -29,25 +36,21 @@ export const SectionContainer = styled.div`
 	align-items: center;
 	background: white;
 	border-radius: 12px;
+	box-shadow: 2px 2px 4px #00000015;
 	display: flex;
 	flex-direction: column;
-	/* width: 100%; */
-	/* height: 400px; */
-	width: 100%;
 	justify-content: flex-start;
-	padding: 16px;
 	margin: 16px;
-	box-shadow: 2px 2px 4px #00000015;
+	padding: 16px;
+	width: 100%;
 `
 
 export const SectionHeader = styled.div`
+	align-items: center;
+	border-bottom: 2px solid #f9f9f9;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items: center;
-	border-bottom-color: #f9f9f9;
-	border-bottom-style: solid;
-	border-bottom-width: 1px;
 	padding: 0px 16px;
 	width: 100%;
 `
@@ -97,4 +100,73 @@ export const TeamButtonText = styled.p`
 
 export const ListContainer = styled.div`
 	width: 50%;
+`
+
+export const GradientSectionContainer = styled(SectionContainer)`
+	flex-direction: row;
+	display: flex;
+	width: 100%;
+	padding: 0px 16px;
+	background: linear-gradient(#c43583, #592880);
+	position: relative;
+`
+
+export const LeftSide = styled.div`
+	width: 50%;
+	border-right: 1px solid #949494;
+`
+
+export const CircleOutline = styled.div`
+	width: 64px;
+	height: 64px;
+	border-radius: 100%;
+	border: 1px solid #949494;
+	margin-left: auto;
+	margin-right: auto;
+	position: absolute;
+	right: 45%;
+	left: 45%;
+`
+
+export const RightSide = styled.div`
+	width: 50%;
+`
+
+export const Player = styled.div`
+	display: flex;
+	/* width: 100%; */
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 40px;
+`
+
+export const AvatarContainer = styled.div`
+	background: #b43f7f;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	width: 156px;
+	height: 156px;
+`
+
+export const MPPContainer = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px dashed #9c9998;
+	border-radius: 50%;
+	border-width: 2px;
+	height: 164px;
+	width: 164px;
+	filter: drop-shadow(10px 10px 10px #520cab)
+		drop-shadow(-10px -10px 10px #520cab);
+`
+
+export const AvatarTitle = styled.span`
+	color: white;
+	font-size: 24px;
+	font-weight: 700;
+	padding-bottom: 24px;
 `

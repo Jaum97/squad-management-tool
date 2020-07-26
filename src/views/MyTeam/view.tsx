@@ -5,7 +5,7 @@ import AverageList from './AverageList'
 import {
 	AddTeamButton,
 	ListContainer,
-	Page,
+	Content,
 	SectionContainer,
 	SectionHeader,
 	SectionTitle,
@@ -13,19 +13,28 @@ import {
 	TeamsBody,
 	Top5Body,
 	WrapperLeft,
-	WrapperRight
+	WrapperRight,
+	GradientSectionContainer,
+	AvatarContainer,
+	AvatarTitle,
+	Player,
+	MPPContainer,
+	LeftSide,
+	RightSide,
+	CircleOutline
 } from './styles'
 import TeamTable from './TeamTable'
-
+import Avatar from 'react-avatar'
+import Page from '../../components/Page'
 // import { IViewProps } from './types'
 
 function MyTeam(): JSX.Element {
 	//props: IViewProps
 	// const {} = props
+
 	return (
-		<Fragment>
-			<Header />
-			<Page>
+		<Page>
+			<Content>
 				<WrapperLeft>
 					<SectionContainer>
 						<SectionHeader>
@@ -55,22 +64,34 @@ function MyTeam(): JSX.Element {
 						</Top5Body>
 					</SectionContainer>
 
-					<SectionContainer>
-						<SectionHeader>
-							<SectionTitle>{'Top 5'}</SectionTitle>
-						</SectionHeader>
-						<Top5Body>
-							<ListContainer>
-								<AverageList />
-							</ListContainer>
-							<ListContainer>
-								<AverageList />
-							</ListContainer>{' '}
-						</Top5Body>
-					</SectionContainer>
+					<GradientSectionContainer>
+						<CircleOutline />
+						<LeftSide>
+							<Player>
+								<AvatarTitle>Most picked player</AvatarTitle>
+								<MPPContainer>
+									<AvatarContainer>
+										<Avatar
+											round
+											name="Foo Bar"
+											size="150"
+										/>
+									</AvatarContainer>
+								</MPPContainer>
+							</Player>
+						</LeftSide>
+						<RightSide>
+							<Player>
+								<AvatarTitle>Least picked player</AvatarTitle>
+								<AvatarContainer>
+									<Avatar round name="Foo Bar" size="150" />
+								</AvatarContainer>{' '}
+							</Player>
+						</RightSide>
+					</GradientSectionContainer>
 				</WrapperRight>
-			</Page>
-		</Fragment>
+			</Content>
+		</Page>
 	)
 }
 

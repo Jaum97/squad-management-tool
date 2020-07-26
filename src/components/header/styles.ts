@@ -3,6 +3,10 @@ import styled from 'styled-components'
 export const Wrapper = styled.header`
 	background: linear-gradient(to right, #b43f7f 75%, #873583);
 	width: 100%;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
 `
 
 export const PageHeader = styled.div`
@@ -10,7 +14,7 @@ export const PageHeader = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
-	min-height: 72px;
+	height: 78px;
 `
 
 export const LogoWrapper = styled.div`
