@@ -1,9 +1,9 @@
 import { createElement } from 'react'
 
-import { IRouteData } from './types'
-import MyTeam from '../views/MyTeam'
 import CreateTeamContainer from '../views/CreateTeam'
+import MyTeam from '../views/MyTeam'
 import { routesEnum } from './enum'
+import { IRouteData } from './types'
 
 export const routesData: IRouteData[] = [
 	{

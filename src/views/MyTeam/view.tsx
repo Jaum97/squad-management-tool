@@ -1,13 +1,19 @@
 import React, { Fragment } from 'react'
+
 import Header from '../../components/header'
+import AverageList from './AverageList'
 import {
+	AddTeamButton,
+	ListContainer,
 	Page,
 	SectionContainer,
 	SectionHeader,
 	SectionTitle,
-	SectionBody,
-	AddTeamButton,
-	TeamButtonText
+	TeamButtonText,
+	TeamsBody,
+	Top5Body,
+	WrapperLeft,
+	WrapperRight
 } from './styles'
 import TeamTable from './TeamTable'
 
@@ -20,24 +26,49 @@ function MyTeam(): JSX.Element {
 		<Fragment>
 			<Header />
 			<Page>
-				<SectionContainer>
-					<SectionHeader>
-						<SectionTitle>{'My teams'}</SectionTitle>
-						<AddTeamButton>
-							<TeamButtonText>{'+'}</TeamButtonText>
-						</AddTeamButton>
-					</SectionHeader>
-					<SectionBody>
-						<TeamTable />
-					</SectionBody>
-				</SectionContainer>
-				<SectionContainer>
-					<SectionHeader>
-						<SectionTitle>{'My teams'}</SectionTitle>
-						{/* <AddTeamButton></AddTeamButton> */}
-					</SectionHeader>
-					<SectionBody></SectionBody>
-				</SectionContainer>
+				<WrapperLeft>
+					<SectionContainer>
+						<SectionHeader>
+							<SectionTitle>{'My teams'}</SectionTitle>
+							<AddTeamButton>
+								<TeamButtonText>{'+'}</TeamButtonText>
+							</AddTeamButton>
+						</SectionHeader>
+						<TeamsBody>
+							<TeamTable />
+						</TeamsBody>
+					</SectionContainer>
+				</WrapperLeft>
+
+				<WrapperRight>
+					<SectionContainer>
+						<SectionHeader>
+							<SectionTitle>{'Top 5'}</SectionTitle>
+						</SectionHeader>
+						<Top5Body>
+							<ListContainer>
+								<AverageList />
+							</ListContainer>
+							<ListContainer>
+								<AverageList />
+							</ListContainer>{' '}
+						</Top5Body>
+					</SectionContainer>
+
+					<SectionContainer>
+						<SectionHeader>
+							<SectionTitle>{'Top 5'}</SectionTitle>
+						</SectionHeader>
+						<Top5Body>
+							<ListContainer>
+								<AverageList />
+							</ListContainer>
+							<ListContainer>
+								<AverageList />
+							</ListContainer>{' '}
+						</Top5Body>
+					</SectionContainer>
+				</WrapperRight>
 			</Page>
 		</Fragment>
 	)

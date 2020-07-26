@@ -1,5 +1,6 @@
 import React from 'react'
-import { Wrapper, PageHeader, LogoWrapper, ImageHolder, Title } from './styles'
+
+import { ImageHolder, LogoWrapper, PageHeader, Title, Wrapper } from './styles'
 
 const logoSrc = require('../../assets/logo_venturus-small.png')
 

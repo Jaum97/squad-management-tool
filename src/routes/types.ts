@@ -1,11 +1,11 @@
-import { Maybe } from "../shared/interfaces/common";
+import { Maybe } from '../shared/interfaces/common'
 
 export interface IRouteData {
-  children: JSX.Element;
-  displayOnNavBar: Maybe<boolean>;
-  exact: boolean;
-  isPrivate: Maybe<boolean>;
-  key: string;
-  name: Maybe<string>;
-  path: string;
+	children: JSX.Element
+	displayOnNavBar: Maybe<boolean>
+	exact: boolean
+	isPrivate: Maybe<boolean>
+	key: string
+	name: Maybe<string>
+	path: string
 }

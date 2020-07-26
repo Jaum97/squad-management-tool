@@ -6,18 +6,38 @@ export const Page = styled.div`
 	/* flex-direction: row; */
 `
 
+export const TransparentWrapper = styled.div`
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	padding: 16px;
+	width: 50%;
+`
+
+export const WrapperLeft = styled(TransparentWrapper)`
+	margin-left: 8px;
+	margin-right: 16px;
+`
+
+export const WrapperRight = styled(TransparentWrapper)`
+	margin-left: 16px;
+	margin-right: 8px;
+`
+
 export const SectionContainer = styled.div`
 	align-items: center;
 	background: white;
 	border-radius: 12px;
 	display: flex;
 	flex-direction: column;
-	height: 400px;
+	/* width: 100%; */
+	/* height: 400px; */
+	width: 100%;
 	justify-content: flex-start;
-	min-height: 72px;
 	padding: 16px;
-	width: 50%;
-	margin: 0px 8px;
+	margin: 16px;
+	box-shadow: 2px 2px 4px #00000015;
 `
 
 export const SectionHeader = styled.div`
@@ -38,8 +58,14 @@ export const SectionTitle = styled.h1`
 	padding-bottom: 16px;
 	font-weight: 700;
 `
-export const SectionBody = styled.div`
+export const TeamsBody = styled.div`
+	width: 100%;
 	padding: 16px;
+`
+
+export const Top5Body = styled.div`
+	display: flex;
+	flex-direction: row;
 `
 
 export const AddTeamButton = styled.div`
@@ -49,10 +75,10 @@ export const AddTeamButton = styled.div`
 	box-shadow: 0px 2px 4px #b43f7f;
 	display: flex;
 	flex-direction: column;
-	height: 24px;
+	height: 36px;
 	justify-content: center;
 	margin-bottom: 16px;
-	width: 24px;
+	width: 36px;
 	cursor: pointer;
 
 	&:hover {
@@ -65,5 +91,14 @@ export const AddTeamButton = styled.div`
 
 export const TeamButtonText = styled.p`
 	color: white;
-	font-size: 18px;
+	font-size: 24px;
+`
+
+export const ListContainer = styled.div`
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	max-width: 50%;
+	margin: 0px 8px;
 `

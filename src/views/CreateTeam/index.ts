@@ -1,4 +1,5 @@
 import { createElement } from 'react'
+
 import IProps from './types'
 import View from './view'
 

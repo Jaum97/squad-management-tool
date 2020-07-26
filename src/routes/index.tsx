@@ -1,9 +1,9 @@
 import React from 'react'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 
+import { FullScreen } from '../styles/defaults'
 import { routesData } from './data'
 import { routesEnum } from './enum'
-import { FullScreen } from '../styles/defaults'
 
 function Routes(): JSX.Element {
 	return (
