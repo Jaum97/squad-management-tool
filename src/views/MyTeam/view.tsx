@@ -47,10 +47,10 @@ function MyTeam(): JSX.Element {
 						</SectionHeader>
 						<Top5Body>
 							<ListContainer>
-								<AverageList />
+								<AverageList title={'Highest avg age'} />
 							</ListContainer>
 							<ListContainer>
-								<AverageList />
+								<AverageList title={'Lowest avg age'} />
 							</ListContainer>{' '}
 						</Top5Body>
 					</SectionContainer>

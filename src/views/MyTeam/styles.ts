@@ -66,6 +66,7 @@ export const TeamsBody = styled.div`
 export const Top5Body = styled.div`
 	display: flex;
 	flex-direction: row;
+	width: 100%;
 `
 
 export const AddTeamButton = styled.div`
@@ -95,10 +96,5 @@ export const TeamButtonText = styled.p`
 `
 
 export const ListContainer = styled.div`
-	align-items: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	max-width: 50%;
-	margin: 0px 8px;
+	width: 50%;
 `

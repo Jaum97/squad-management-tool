@@ -12,48 +12,14 @@ import {
 	CellToolTip
 } from './styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import cogoToast from 'cogo-toast'
+import { MOCKED_DATA } from './data'
+
+const cogoOpts = { position: 'top-right' as 'top-right' }
 
 function TeamTable(): JSX.Element {
 	const [sortBy, setSortBy] = useState({ header: 'name', order: 'asc' })
-
-	const mocked = [
-		{
-			name: 'barcelona',
-			description: 'barcelonaSquad'
-		},
-		{
-			name: 'realmadrid',
-			description: 'realmadridSquad'
-		},
-		{
-			name: 'milan',
-			description: 'milanSquad'
-		},
-		{
-			name: 'milan',
-			description: 'milanSquad'
-		},
-		{
-			name: 'milan',
-			description: 'milanSquad'
-		},
-		{
-			name: 'milan',
-			description: 'milanSquad'
-		},
-		{
-			name: 'milan',
-			description: 'milanSquad'
-		},
-		{
-			name: 'amiguinhos',
-			description: 'amiguinhosSquad'
-		},
-		{
-			name: 'amiguinhos',
-			description: 'zSquad'
-		}
-	]
+	const [list, setList] = useState(MOCKED_DATA)
 
 	const sortFn = (a: any, b: any) => {
 		const { header, order } = sortBy
@@ -64,7 +30,7 @@ function TeamTable(): JSX.Element {
 		return first[header].localeCompare(second[header])
 	}
 
-	const sortRows = (field: string) => () => {
+	const sortRowsBy = (field: string) => () => {
 		const { header, order: oldOrder } = sortBy
 
 		const shouldChangeOrder = header === field
@@ -90,17 +56,27 @@ function TeamTable(): JSX.Element {
 		return order === 'asc' ? 'sort-up' : 'sort-down'
 	}
 
+	const share = () => {
+		cogoToast.error('Feature not yet implemented :/', cogoOpts)
+	}
+
+	const deleteTeam = (i: number) => () => {
+		setList((l) => l.filter((_, i2) => i2 !== i))
+
+		cogoToast.success('Team deleted successfully', cogoOpts)
+	}
+
 	return (
 		<TableWrapper>
 			<thead>
 				<TableHeaderRow>
-					<TableHeader onClick={sortRows('name')}>
+					<TableHeader onClick={sortRowsBy('name')}>
 						<HeaderContentWrapper>
 							Name
 							<FontAwesomeIcon icon={getIcon('name')} />
 						</HeaderContentWrapper>
 					</TableHeader>
-					<TableHeader onClick={sortRows('description')}>
+					<TableHeader onClick={sortRowsBy('description')}>
 						<HeaderContentWrapper>
 							Description
 							<FontAwesomeIcon icon={getIcon('description')} />
@@ -109,7 +85,7 @@ function TeamTable(): JSX.Element {
 				</TableHeaderRow>
 			</thead>
 			<TableBody>
-				{mocked.sort(sortFn).map((item, i) => (
+				{list.sort(sortFn).map((item, i) => (
 					<TableBodyRow key={i}>
 						<TableCell>{item.name}</TableCell>
 						<TableCell>
@@ -117,12 +93,12 @@ function TeamTable(): JSX.Element {
 								{item.description}
 								<div>
 									<CellIcon
-										onClick={() => console.log('1')}
+										onClick={deleteTeam(i)}
 										icon="trash"
 										data-tip="Delete"
 									/>
 									<CellIcon
-										onClick={() => console.log('2')}
+										onClick={share}
 										icon="share-alt"
 										data-tip="Share"
 									/>

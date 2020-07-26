@@ -8,7 +8,7 @@ export const TableWrapper = styled.table`
 `
 
 export const TableHeader = styled.th`
-	color: #272927;
+	color: #373837;
 	cursor: pointer;
 	font-size: 0.875em;
 	justify-content: space-between;
@@ -36,7 +36,7 @@ export const TableCell = styled.td`
 	border-bottom: 1px solid #eeeeee;
 	box-sizing: border-box;
 	color: #272927;
-	font-size: 1rem;
+	font-size: 0.875rem;
 	font-weight: 700;
 	padding: 16px;
 `

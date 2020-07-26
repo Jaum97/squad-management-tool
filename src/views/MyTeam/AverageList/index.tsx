@@ -1,50 +1,31 @@
 import React from 'react'
+import {
+	ListWrapper,
+	ListTitle,
+	ListItem,
+	UnorderedList,
+	ItemName,
+	ItemValue
+} from './styles'
+import { MOCKED_LIST } from './data'
 
 // import IProps from './types'
 
-function AverageList(): JSX.Element {
-	// const { data, updateResaleItem, updateResaleItemDate } = props
-
-	const mocked = [
-		{
-			name: 'barcelona',
-			value: 31.9
-		},
-		{
-			name: 'realmadrid',
-			value: 31.6
-		},
-		{
-			name: 'milan',
-			value: 31.5
-		},
-		{
-			name: 'milan',
-			value: 35.1
-		}
-	]
+function AverageList(props: any): JSX.Element {
+	const { title } = props
 
 	return (
-		<div>
-			<p>Title</p>
-			<ul>
-				{mocked.map((item, i) => (
-					<li key={i}>
-						<span>{item.name}</span>
-						<span>{item.value}</span>
-					</li>
+		<ListWrapper>
+			<ListTitle>{title}</ListTitle>
+			<UnorderedList>
+				{MOCKED_LIST.map((item, i) => (
+					<ListItem key={i}>
+						<ItemName>{item.name}</ItemName>
+						<ItemValue>{item.value}</ItemValue>
+					</ListItem>
 				))}
-				{/* {data.map((item: IResaleItem, i: number) => (
-					<ResaleItem
-						key={i}
-						index={i}
-						item={item}
-						updateResaleItem={updateResaleItem}
-						updateResaleItemDate={updateResaleItemDate}
-					/>
-				))} */}
-			</ul>
-		</div>
+			</UnorderedList>
+		</ListWrapper>
 	)
 }
 
