@@ -4,14 +4,16 @@ import {
 	TableHeader,
 	TableBody,
 	TableBodyRow,
-	TableCell
+	TableCell,
+	HeaderContentWrapper,
+	TableHeaderRow,
+	CellContentWrapper,
+	CellIcon,
+	CellToolTip
 } from './styles'
-
-// import IProps from './types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function TeamTable(): JSX.Element {
-	// const { data, updateResaleItem, updateResaleItemDate } = props
-
 	const [sortBy, setSortBy] = useState({ header: 'name', order: 'asc' })
 
 	const mocked = [
@@ -63,33 +65,76 @@ function TeamTable(): JSX.Element {
 	}
 
 	const sortRows = (field: string) => () => {
-		const changeOrder = sortBy.header === field
+		const { header, order: oldOrder } = sortBy
 
-		if (changeOrder) {
-			return setSortBy((s) => ({
-				...s,
-				order: s.order === 'asc' ? 'desc' : 'asc'
-			}))
+		const shouldChangeOrder = header === field
+
+		if (shouldChangeOrder) {
+			const order = oldOrder === 'asc' ? 'desc' : 'asc'
+
+			setSortBy((s) => ({ ...s, order }))
+
+			return
 		}
 
 		setSortBy({ header: field, order: 'asc' })
 	}
 
+	const getIcon = (field: string) => {
+		const { header, order } = sortBy
+
+		const isBeignSorted = header === field
+
+		if (!isBeignSorted) return 'sort'
+
+		return order === 'asc' ? 'sort-up' : 'sort-down'
+	}
+
 	return (
 		<TableWrapper>
 			<thead>
-				<tr>
-					<TableHeader onClick={sortRows('name')}>Name</TableHeader>
-					<TableHeader onClick={sortRows('description')}>
-						Description
+				<TableHeaderRow>
+					<TableHeader onClick={sortRows('name')}>
+						<HeaderContentWrapper>
+							Name
+							<FontAwesomeIcon icon={getIcon('name')} />
+						</HeaderContentWrapper>
 					</TableHeader>
-				</tr>
+					<TableHeader onClick={sortRows('description')}>
+						<HeaderContentWrapper>
+							Description
+							<FontAwesomeIcon icon={getIcon('description')} />
+						</HeaderContentWrapper>
+					</TableHeader>
+				</TableHeaderRow>
 			</thead>
 			<TableBody>
 				{mocked.sort(sortFn).map((item, i) => (
 					<TableBodyRow key={i}>
 						<TableCell>{item.name}</TableCell>
-						<TableCell>{item.description}</TableCell>
+						<TableCell>
+							<CellContentWrapper>
+								{item.description}
+								<div>
+									<CellIcon
+										onClick={() => console.log('1')}
+										icon="trash"
+										data-tip="Delete"
+									/>
+									<CellIcon
+										onClick={() => console.log('2')}
+										icon="share-alt"
+										data-tip="Share"
+									/>
+									<CellIcon
+										onClick={() => console.log('3')}
+										icon="pencil-alt"
+										data-tip="Edit"
+									/>
+									<CellToolTip />
+								</div>
+							</CellContentWrapper>
+						</TableCell>
 					</TableBodyRow>
 				))}
 			</TableBody>
