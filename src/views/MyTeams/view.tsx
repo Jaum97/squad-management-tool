@@ -1,6 +1,7 @@
 import React from 'react'
 import Avatar from 'react-avatar'
 
+import { routesEnum } from '../../routes/enum'
 import AverageList from './AverageList'
 import {
 	AddTeamButton,
@@ -26,8 +27,6 @@ import {
 	WrapperRight
 } from './styles'
 import TeamTable from './TeamTable'
-import { routesEnum } from '../../routes/enum'
-
 import { IViewProps } from './types'
 
 function MyTeams(props: IViewProps): JSX.Element {

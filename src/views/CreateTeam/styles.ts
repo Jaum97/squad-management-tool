@@ -1,5 +1,8 @@
 import styled from 'styled-components'
 
+import { colors } from '../../styles/colors'
+import { GradientSectionContainer } from '../MyTeams/styles'
+
 export const Wrapper = styled.div`
 	align-items: center;
 	display: flex;
@@ -60,7 +63,7 @@ export const Spacer = styled.div`
 `
 
 export const InputTitle = styled.h2`
-	color: #b43f7f;
+	color: ${colors.secondary};
 	font-size: 16px;
 	display: flex;
 	flex-direction: column;
@@ -100,8 +103,65 @@ export const TagsContainer = styled.div`
 export const Tag = styled.span`
 	border-radius: 12px;
 	margin: 2px 4px;
-	background: #b43f7f;
+	background: ${colors.secondary};
 	padding: 4px 8px;
 	font-size: 12px;
 	color: white;
+`
+
+export const PlaceholderContainer = styled.div`
+	align-items: center;
+	border-radius: 50%;
+	border: 1px dashed grey;
+	display: flex;
+	flex-direction: column;
+	height: 88px;
+	justify-content: center;
+	margin: 16px 0px;
+	width: 88px;
+`
+
+export const PlayerPlaceholder = styled.div`
+	background: #eeeeee80;
+
+	display: flex;
+	color: white;
+	/* border: 1px solid #666666; */
+	box-shadow: 1px 1px 1px #00000050;
+	font-size: 24px;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 80px;
+	width: 80px;
+	border-radius: 50%;
+`
+
+export const TeamFormationContainer = styled(GradientSectionContainer)`
+	flex-direction: column;
+	margin: 16px 0px;
+`
+
+export const FormationSectionContainer = styled.div`
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+	justify-content: space-around;
+`
+
+export const SaveButton = styled.button`
+	border-radius: 3px;
+	border: 1px solid #c43583;
+	background: linear-gradient(#c43583, #592880);
+	color: white;
+	text-align: center;
+	font-size: 18px;
+	padding: 8px 16px;
+	&:hover {
+		/* border: 1px solid transparent; */
+		box-shadow: inset -2px -2px 8px rgba(135, 53, 131, 1),
+			inset -2px -2px 12px rgba(135, 53, 131, 0.5),
+			inset 2px 2px 4px rgba(135, 53, 131, 0.1),
+			inset 2px 2px 8px rgba(0, 0, 0, 0.15);
+	}
 `

@@ -1,5 +1,8 @@
 import styled from 'styled-components'
 
+import { useLinearGradient } from '../../shared/utils/styles'
+import { colors } from '../../styles/colors'
+
 export const Content = styled.div`
 	display: flex;
 	@media (max-width: 800px) {
@@ -71,9 +74,13 @@ export const Top5Body = styled.div`
 
 export const AddTeamButton = styled.div`
 	align-items: center;
-	background: linear-gradient(#b43f7f, #873583 65%);
+	background: ${useLinearGradient(
+		colors.secondary,
+		colors.primary + ' 65%',
+		'to bottom'
+	)};
 	border-radius: 6px;
-	box-shadow: 0px 2px 4px #b43f7f;
+	box-shadow: 0px 2px 4px ${colors.secondary};
 	display: flex;
 	flex-direction: column;
 	height: 36px;
@@ -142,7 +149,7 @@ export const Player = styled.div`
 `
 
 export const AvatarContainer = styled.div`
-	background: #b43f7f;
+	background: ${colors.secondary};
 	display: flex;
 	align-items: center;
 	justify-content: center;

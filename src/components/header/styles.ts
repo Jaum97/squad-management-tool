@@ -1,7 +1,10 @@
 import styled from 'styled-components'
 
+import { useLinearGradient } from '../../shared/utils/styles'
+import { colors } from '../../styles/colors'
+
 export const Wrapper = styled.header`
-	background: linear-gradient(to right, #b43f7f 75%, #873583);
+	background: ${useLinearGradient(colors.secondary + ' 75%', colors.primary)};
 	width: 100%;
 	position: fixed;
 	left: 0;

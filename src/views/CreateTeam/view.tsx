@@ -1,35 +1,51 @@
 import React from 'react'
+import Avatar from 'react-avatar'
+import { useHistory } from 'react-router-dom'
+import Select from 'react-select'
+import ReactTags from 'react-tag-autocomplete'
+
+import RadioButton from '../../components/RadioButton'
 import {
 	AddTeamButton,
-	TeamButtonText,
-	SectionContainer,
 	Content,
+	GradientSectionContainer,
+	SectionContainer,
 	SectionHeader,
-	SectionTitle
+	SectionTitle,
+	TeamButtonText
 } from '../MyTeams/styles'
-import { useHistory } from 'react-router-dom'
+import SquadFormation from './SquadFormation'
 import {
-	Wrapper,
-	RowContainer,
 	ColumnContainer,
+	FormationSectionContainer,
+	Input,
 	InputContainer,
 	InputTitle,
-	Input,
-	Textarea,
+	PlaceholderContainer,
+	PlayerPlaceholder,
 	RadioButtonsContainer,
+	RowContainer,
+	SaveButton,
 	Spacer,
-	TextAreaContainer,
+	Tag,
 	TagsContainer,
-	Tag
+	TeamFormationContainer,
+	Textarea,
+	TextAreaContainer,
+	Title,
+	Wrapper
 } from './styles'
-import RadioButton from '../../components/RadioButton'
+import InputTag from './TagInput'
+import { Formation } from './types'
 
 // import IProps from './types'
 
 function CreateTeam(props: any): JSX.Element {
 	//props: IProps
-	const { updateTeam, team } = props
+	const { updateTeam, team, formations, saveTeam, addTag, removeTag } = props
 	const history = useHistory()
+
+	const { tags } = team
 
 	return (
 		<Content>
@@ -41,6 +57,8 @@ function CreateTeam(props: any): JSX.Element {
 					<SectionHeader>
 						<SectionTitle>{'Create your team'}</SectionTitle>
 					</SectionHeader>
+
+					<Title>{'TEAM INFORMATION'}</Title>
 
 					<RowContainer>
 						<ColumnContainer>
@@ -54,7 +72,13 @@ function CreateTeam(props: any): JSX.Element {
 							</InputContainer>
 							<InputContainer>
 								<InputTitle>{'Description'}</InputTitle>
-								<Textarea rows={10} cols={10} maxLength={100} />
+								<Textarea
+									rows={10}
+									cols={10}
+									maxLength={100}
+									onChange={updateTeam('description')}
+									value={team.description}
+								/>
 							</InputContainer>
 						</ColumnContainer>
 						<ColumnContainer>
@@ -62,8 +86,8 @@ function CreateTeam(props: any): JSX.Element {
 								<InputTitle>{'Team website'}</InputTitle>
 								<Input
 									placeholder="http://myteam.com"
-									onChange={updateTeam('name')}
-									value={team.name}
+									onChange={updateTeam('website')}
+									value={team.website}
 								/>
 							</InputContainer>
 							<InputContainer>
@@ -85,21 +109,28 @@ function CreateTeam(props: any): JSX.Element {
 
 							<InputContainer>
 								<InputTitle>{'Tags'}</InputTitle>
-								<TextAreaContainer>
-									<Textarea
-										rows={5}
-										cols={10}
-										maxLength={100}
-									/>
-									<TagsContainer>
-										{team.tags.map(
-											(x: string, i: number) => (
-												<Tag key={i}>{x}</Tag>
-											)
-										)}
-									</TagsContainer>
-								</TextAreaContainer>
+								<InputTag
+									tags={team.tags}
+									addTag={addTag}
+									removeTag={removeTag}
+								/>
 							</InputContainer>
+						</ColumnContainer>
+					</RowContainer>
+
+					<Title>{'CONFIGURE SQUAD'}</Title>
+
+					<RowContainer>
+						<ColumnContainer>
+							<p>Formation</p>
+							<Select options={formations} />
+							<SquadFormation />
+							<SaveButton onClick={saveTeam}>{'Save'}</SaveButton>
+						</ColumnContainer>
+
+						<ColumnContainer>
+							<p>Search Players</p>
+							<Select options={formations} />
 						</ColumnContainer>
 					</RowContainer>
 				</SectionContainer>

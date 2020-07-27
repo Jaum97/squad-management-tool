@@ -3,10 +3,10 @@ import { combineReducers, Reducer, ReducersMapObject } from 'redux'
 import { IStore } from '../types'
 // import { IActionsCreators } from '../../interfaces/action'
 // import { IStore } from '../../interfaces/store'
-import selectedTeam from './selectedTeam'
+import teams from './teams'
 
 const reducers: ReducersMapObject<IStore> = {
-	selectedTeam
+	teams
 }
 
 export const Reducers: Reducer = combineReducers(reducers)

@@ -1,5 +1,6 @@
 import React from 'react'
-import { RadioInput, RadioOutline, RadioCheck, RadioLabel } from './styles'
+
+import { RadioCheck, RadioInput, RadioLabel, RadioOutline } from './styles'
 
 // import IProps from './types'
 

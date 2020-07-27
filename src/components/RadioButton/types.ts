@@ -1,3 +1,3 @@
 export interface IStyledSpanExtraProps {
-    checked: boolean
+	checked: boolean
 }

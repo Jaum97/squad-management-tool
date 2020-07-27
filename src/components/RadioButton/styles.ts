@@ -1,4 +1,7 @@
 import styled from 'styled-components'
+
+import { useLinearGradient } from '../../shared/utils/styles'
+import { colors } from '../../styles/colors'
 import { IStyledSpanExtraProps } from './types'
 
 export const RadioLabel = styled.label`
@@ -29,7 +32,11 @@ export const RadioCheck = styled.span<IStyledSpanExtraProps>`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: linear-gradient(#b43f7f, #873583 55%);
+	background: ${useLinearGradient(
+		colors.secondary,
+		colors.primary + ' 55%',
+		'to bottom'
+	)};
 	position: absolute;
 	opacity: ${({ checked: c }) => (c ? 1 : 0)};
 	transition: all 0.4s;
