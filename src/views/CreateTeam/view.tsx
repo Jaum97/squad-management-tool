@@ -25,15 +25,11 @@ import {
 	Textarea,
 	Title,
 	TypeContainer,
-	Wrapper,
-	PlayerCardContainer,
-	PlayerField,
-	CardLeftSide,
-	FieldWrapper,
-	FieldLabel
+	Wrapper
 } from './styles'
 import InputTag from './TagInput'
 import { IViewProps } from './types'
+import PlayerCard from './PlayerCard'
 
 function CreateTeam(props: IViewProps): JSX.Element {
 	const {
@@ -68,7 +64,6 @@ function CreateTeam(props: IViewProps): JSX.Element {
 					</SectionHeader>
 
 					<Title>{'TEAM INFORMATION'}</Title>
-
 					<RowContainer>
 						<ColumnContainer>
 							<InputContainer>
@@ -82,6 +77,7 @@ function CreateTeam(props: IViewProps): JSX.Element {
 									value={team.name}
 								/>
 							</InputContainer>
+
 							<InputContainer>
 								<InputTitle>{'Description'}</InputTitle>
 								<Textarea
@@ -93,6 +89,7 @@ function CreateTeam(props: IViewProps): JSX.Element {
 								/>
 							</InputContainer>
 						</ColumnContainer>
+
 						<ColumnContainer>
 							<InputContainer>
 								<InputTitle invalid={isInvalid('website')}>
@@ -105,6 +102,7 @@ function CreateTeam(props: IViewProps): JSX.Element {
 									value={team.website}
 								/>
 							</InputContainer>
+
 							<TypeContainer>
 								<InputTitle>{'Team type'}</InputTitle>
 								<RadioButtonsContainer>
@@ -152,36 +150,14 @@ function CreateTeam(props: IViewProps): JSX.Element {
 							/>
 							{loading ? (
 								<p>Loading ...</p>
+							) : availablePlayers.length ? (
+								availablePlayers.map(PlayerCard)
 							) : (
-								availablePlayers.map((player, i) => (
-									<PlayerCardContainer key={i}>
-										<CardLeftSide>
-											<FieldWrapper>
-												<FieldLabel>Name: </FieldLabel>
-												<PlayerField>
-													{player.player_name}
-												</PlayerField>
-											</FieldWrapper>
-
-											<FieldWrapper>
-												<FieldLabel>
-													Nationality:{' '}
-												</FieldLabel>
-												<PlayerField>
-													{player.nationality}
-												</PlayerField>
-											</FieldWrapper>
-										</CardLeftSide>
-
-										<FieldWrapper>
-											<FieldLabel>Age: </FieldLabel>
-
-											<PlayerField>
-												{player.age}
-											</PlayerField>
-										</FieldWrapper>
-									</PlayerCardContainer>
-								))
+								<p>
+									{searchInput.length
+										? 'No player found'
+										: 'Write something in the search for players'}
+								</p>
 							)}
 						</ColumnContainer>
 					</RowContainer>

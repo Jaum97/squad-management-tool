@@ -14,30 +14,28 @@ function CreateTeamContainer(props: IProps): JSX.Element {
 	const dispatch = useDispatch()
 	const { addTeam: addTeamToStore } = TeamActions
 
-	// const { teams } = useTypedSelector(['teams'])
-
 	const [{ data, loading }, execute] = useAxios('/search', { manual: true })
 
 	const [team, setTeam] = useState(DEFAULT_TEAM)
 	const [inputsWithError, setInputsWithError] = useState<string[]>([])
-	const [availablePlayers, setAvailablePlayers] = useState([
-		{
-			player_name: 'Pelé',
-			nationality: 'Brazil',
-			age: 33
-		},
-		{
-			player_name: 'Ronaldo',
-			nationality: 'Noruega',
-			age: 55
-		},
-		{
-			player_name: 'Maradon',
-			nationality: 'Argentina',
-			age: 100
-		}
-	])
+	const [availablePlayers, setAvailablePlayers] = useState([])
 	const [searchInput, setSearchInput] = useState('')
+
+	// const mocked = [	{
+	// 	player_name: 'Pelé',
+	// 	nationality: 'Brazil',
+	// 	age: 33
+	// },
+	// {
+	// 	player_name: 'Ronaldo',
+	// 	nationality: 'Noruega',
+	// 	age: 55
+	// },
+	// {
+	// 	player_name: 'Maradon',
+	// 	nationality: 'Argentina',
+	// 	age: 100
+	// }]
 
 	console.log({ availablePlayers, data })
 
@@ -105,29 +103,6 @@ function CreateTeamContainer(props: IProps): JSX.Element {
 
 	const formations = VALID_FORMATIONS.map(getFormationString).map(getOption)
 
-	// const getPlayers = (x: string): any[] => {
-	// 	// execute({ url: `/search/${x}`}) as any
-	// 	return ['test']
-	// }
-
-	// const loadOptions = (
-	// 	inputValue: string,
-	// 	callback: (options: OptionsType<ISelectOption>) => void
-	// ) => {
-	// 	const endpoint = `https://www.api-football.com/demo/v2`
-
-	// 	const params = `players/search/${inputValue}`
-
-	// 	const url = `${BYPASS_CORS_PROXY}/${endpoint}/${params}`
-
-	// 	execute({ url }).then((x1) => {
-	// 		console.log('execute return', { x1 })
-	// 	})
-	// 	setTimeout(() => {
-	// 		callback(getPlayers(inputValue))
-	// 	}, 1000)
-	// }
-
 	const getPlayers = () => {
 		if (searchInput.length < 4) return
 
@@ -141,7 +116,7 @@ function CreateTeamContainer(props: IProps): JSX.Element {
 	}
 
 	const reflectFetchedPlayers = () => {
-		if (!data?.api?.players?.length) return
+		if (!data?.api) return
 
 		const { players } = data.api
 
