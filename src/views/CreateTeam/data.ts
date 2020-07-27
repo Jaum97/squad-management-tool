@@ -1,4 +1,4 @@
-import { Formation } from './types'
+import { Formation, ITeam } from './types'
 
 export const VALID_FORMATIONS: Formation[] = [
 	[3, 2, 2, 3],
@@ -12,3 +12,13 @@ export const VALID_FORMATIONS: Formation[] = [
 	[4, 5, 1, 0],
 	[5, 4, 1, 0]
 ]
+
+export const DEFAULT_TEAM: ITeam = {
+	name: '',
+	description: '',
+	website: '',
+	type: 'fantasy',
+	tags: [],
+	formationLayout: '',
+	formation: ([] as unknown) as Formation
+}

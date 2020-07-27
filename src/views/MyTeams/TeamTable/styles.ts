@@ -2,6 +2,7 @@ import ReactTooltip from 'react-tooltip'
 import styled from 'styled-components'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { colors } from '../../../styles/colors'
 
 export const TableWrapper = styled.table`
 	border-collapse: collapse;
@@ -36,7 +37,7 @@ export const TableBody = styled.tbody``
 export const TableCell = styled.td`
 	border-bottom: 1px solid #eeeeee;
 	box-sizing: border-box;
-	color: #272927;
+	color: ${colors.darkGrey};
 	font-size: 0.875rem;
 	font-weight: 700;
 	padding: 16px;

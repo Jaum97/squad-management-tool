@@ -18,7 +18,11 @@ function InputTag(props: any) {
 		const { key } = e
 		const { value } = e.target as any
 
-		if (key === 'Enter' && value) {
+		// const valid = value.replace(/;/gi, '')
+
+		const wantsToAdd = (key === 'Enter' || key === ';') && value
+
+		if (wantsToAdd) {
 			const lower = (x: string) => x.toLowerCase()
 
 			const tagExists = (tag: string) => lower(tag) === lower(value)

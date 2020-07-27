@@ -11,7 +11,6 @@ export const RadioLabel = styled.label`
 	font-size: 16px;
 	align-items: center;
 	position: relative;
-	margin-bottom: 16px;
 `
 
 export const RadioOutline = styled.span`

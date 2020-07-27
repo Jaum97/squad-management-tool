@@ -33,23 +33,33 @@ import {
 	Textarea,
 	TextAreaContainer,
 	Title,
-	Wrapper
+	Wrapper,
+	TypeContainer
 } from './styles'
 import InputTag from './TagInput'
-import { Formation } from './types'
+import { IViewProps } from './types'
 
 // import IProps from './types'
 
-function CreateTeam(props: any): JSX.Element {
-	//props: IProps
-	const { updateTeam, team, formations, saveTeam, addTag, removeTag } = props
+function CreateTeam(props: IViewProps): JSX.Element {
+	const {
+		formations,
+		inputsWithError,
+		team,
+		addTag,
+		removeTag,
+		saveTeam,
+		updateTeam
+	} = props
 	const history = useHistory()
 
 	const { tags } = team
 
+	const isInvalid = (x: string) => inputsWithError.includes(x)
+
 	return (
 		<Content>
-			<AddTeamButton onClick={() => history.goBack()}>
+			<AddTeamButton onClick={history.goBack}>
 				<TeamButtonText>{'<'}</TeamButtonText>
 			</AddTeamButton>
 			<Wrapper>
@@ -63,8 +73,11 @@ function CreateTeam(props: any): JSX.Element {
 					<RowContainer>
 						<ColumnContainer>
 							<InputContainer>
-								<InputTitle>{'Team name'}</InputTitle>
+								<InputTitle invalid={isInvalid('name')}>
+									{'Team name'}
+								</InputTitle>
 								<Input
+									invalid={isInvalid('name')}
 									placeholder="Insert team name"
 									onChange={updateTeam('name')}
 									value={team.name}
@@ -73,7 +86,7 @@ function CreateTeam(props: any): JSX.Element {
 							<InputContainer>
 								<InputTitle>{'Description'}</InputTitle>
 								<Textarea
-									rows={10}
+									rows={12}
 									cols={10}
 									maxLength={100}
 									onChange={updateTeam('description')}
@@ -83,14 +96,17 @@ function CreateTeam(props: any): JSX.Element {
 						</ColumnContainer>
 						<ColumnContainer>
 							<InputContainer>
-								<InputTitle>{'Team website'}</InputTitle>
+								<InputTitle invalid={isInvalid('website')}>
+									{'Team website'}
+								</InputTitle>
 								<Input
+									invalid={isInvalid('website')}
 									placeholder="http://myteam.com"
 									onChange={updateTeam('website')}
 									value={team.website}
 								/>
 							</InputContainer>
-							<InputContainer>
+							<TypeContainer>
 								<InputTitle>{'Team type'}</InputTitle>
 								<RadioButtonsContainer>
 									<RadioButton
@@ -105,16 +121,16 @@ function CreateTeam(props: any): JSX.Element {
 										checked={team.type === 'fantasy'}
 									/>
 								</RadioButtonsContainer>
-							</InputContainer>
+							</TypeContainer>
 
-							<InputContainer>
+							<TagsContainer>
 								<InputTitle>{'Tags'}</InputTitle>
 								<InputTag
 									tags={team.tags}
 									addTag={addTag}
 									removeTag={removeTag}
 								/>
-							</InputContainer>
+							</TagsContainer>
 						</ColumnContainer>
 					</RowContainer>
 

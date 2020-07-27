@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 import { colors } from '../../styles/colors'
 import { GradientSectionContainer } from '../MyTeams/styles'
+import { IInputStyledProps } from './types'
 
 export const Wrapper = styled.div`
 	align-items: center;
@@ -50,8 +51,16 @@ export const InputContainer = styled.div`
 	align-items: flex-start;
 `
 
+export const TagsContainer = styled(InputContainer)`
+	margin: 0px 0px 0px 0px;
+`
+
+export const TypeContainer = styled(InputContainer)`
+	margin: 38px 0px 0px 0px;
+`
+
 export const RadioButtonsContainer = styled.div`
-	margin: 8px 0px;
+	margin: 0px 0px 8px 0px;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
@@ -62,18 +71,18 @@ export const Spacer = styled.div`
 	width: 32px;
 `
 
-export const InputTitle = styled.h2`
-	color: ${colors.secondary};
+export const InputTitle = styled.h2<IInputStyledProps>`
+	color: ${({ invalid: i }) => (i ? colors.secondary : colors.darkGrey)};
 	font-size: 16px;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 `
 
-export const Input = styled.input`
+export const Input = styled.input<IInputStyledProps>`
 	padding: 6px 12px;
 	width: 100%;
-	border: solid 1px #d1d1d1;
+	border: solid 1px ${({ invalid: i }) => (i ? colors.secondary : '#d1d1d1')};
 	color: #d1d1d1;
 	border-radius: 3px;
 `
@@ -90,14 +99,6 @@ export const Textarea = styled.textarea`
 export const TextAreaContainer = styled.div`
 	position: relative;
 	width: 100%;
-`
-
-export const TagsContainer = styled.div`
-	position: absolute;
-	display: flex;
-	flex-wrap: wrap;
-	top: 10px;
-	left: 10px;
 `
 
 export const Tag = styled.span`

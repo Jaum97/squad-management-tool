@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { colors } from '../../styles/colors'
 
 export const Main = styled.main`
 	bottom: 40px;
@@ -16,7 +17,7 @@ export const Footer = styled.footer`
 	align-content: center;
 	background-color: #dcdcdc;
 	bottom: 0;
-	color: #272927;
+	color: ${colors.darkGrey};
 	display: flex;
 	flex-direction: column;
 	font-size: 14px;
