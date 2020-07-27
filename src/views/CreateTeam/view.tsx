@@ -1,14 +1,11 @@
 import React from 'react'
-import Avatar from 'react-avatar'
 import { useHistory } from 'react-router-dom'
 import Select from 'react-select'
-import ReactTags from 'react-tag-autocomplete'
 
 import RadioButton from '../../components/RadioButton'
 import {
 	AddTeamButton,
 	Content,
-	GradientSectionContainer,
 	SectionContainer,
 	SectionHeader,
 	SectionTitle,
@@ -17,35 +14,37 @@ import {
 import SquadFormation from './SquadFormation'
 import {
 	ColumnContainer,
-	FormationSectionContainer,
 	Input,
 	InputContainer,
 	InputTitle,
-	PlaceholderContainer,
-	PlayerPlaceholder,
 	RadioButtonsContainer,
 	RowContainer,
 	SaveButton,
 	Spacer,
-	Tag,
 	TagsContainer,
-	TeamFormationContainer,
 	Textarea,
-	TextAreaContainer,
 	Title,
+	TypeContainer,
 	Wrapper,
-	TypeContainer
+	PlayerCardContainer,
+	PlayerField,
+	CardLeftSide,
+	FieldWrapper,
+	FieldLabel
 } from './styles'
 import InputTag from './TagInput'
 import { IViewProps } from './types'
-
-// import IProps from './types'
 
 function CreateTeam(props: IViewProps): JSX.Element {
 	const {
 		formations,
 		inputsWithError,
 		team,
+		availablePlayers,
+		handleSearchChange,
+		searchInput,
+		loading,
+		// loadOptions,
 		addTag,
 		removeTag,
 		saveTeam,
@@ -53,7 +52,7 @@ function CreateTeam(props: IViewProps): JSX.Element {
 	} = props
 	const history = useHistory()
 
-	const { tags } = team
+	// const { tags } = team
 
 	const isInvalid = (x: string) => inputsWithError.includes(x)
 
@@ -146,7 +145,44 @@ function CreateTeam(props: IViewProps): JSX.Element {
 
 						<ColumnContainer>
 							<p>Search Players</p>
-							<Select options={formations} />
+							<Input
+								placeholder="Search"
+								onChange={handleSearchChange}
+								value={searchInput}
+							/>
+							{loading ? (
+								<p>Loading ...</p>
+							) : (
+								availablePlayers.map((player, i) => (
+									<PlayerCardContainer key={i}>
+										<CardLeftSide>
+											<FieldWrapper>
+												<FieldLabel>Name: </FieldLabel>
+												<PlayerField>
+													{player.player_name}
+												</PlayerField>
+											</FieldWrapper>
+
+											<FieldWrapper>
+												<FieldLabel>
+													Nationality:{' '}
+												</FieldLabel>
+												<PlayerField>
+													{player.nationality}
+												</PlayerField>
+											</FieldWrapper>
+										</CardLeftSide>
+
+										<FieldWrapper>
+											<FieldLabel>Age: </FieldLabel>
+
+											<PlayerField>
+												{player.age}
+											</PlayerField>
+										</FieldWrapper>
+									</PlayerCardContainer>
+								))
+							)}
 						</ColumnContainer>
 					</RowContainer>
 				</SectionContainer>

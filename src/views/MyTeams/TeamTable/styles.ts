@@ -2,6 +2,7 @@ import ReactTooltip from 'react-tooltip'
 import styled from 'styled-components'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import { colors } from '../../../styles/colors'
 
 export const TableWrapper = styled.table`

@@ -12,9 +12,17 @@ export interface ISelectOption {
 }
 
 export interface IViewProps {
+	availablePlayers: any[]
 	formations: ISelectOption[]
-	team: ITeam
 	inputsWithError: string[]
+	searchInput: string
+	team: ITeam
+	loading: boolean
+	handleSearchChange: (e: ChangeEvent<HTMLInputElement>) => void
+	// loadOptions: (
+	// 	inputValue: string,
+	// 	callback: (options: OptionsType<ISelectOption>) => void
+	// ) => void
 	addTag: (value: string) => void
 	removeTag: (i: number) => () => void
 	saveTeam: () => void

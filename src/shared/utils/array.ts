@@ -1,7 +1,7 @@
 export function mode(array: string[]): string {
 	const { length } = array
 
-	if (length == 0) return ''
+	if (length === 0) return ''
 
 	var modeMap = {} as any
 	var mostOcurrencesEl = array[0]

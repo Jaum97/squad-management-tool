@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, MutableRefObject, useRef, useState } from 'react'
+import React, { KeyboardEvent, useRef } from 'react'
 
 import {
 	InputTagButton,

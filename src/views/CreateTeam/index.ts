@@ -1,24 +1,45 @@
-import { ChangeEvent, createElement, useState } from 'react'
+import useAxios from 'axios-hooks'
+import cogoToast from 'cogo-toast'
+import { ChangeEvent, createElement, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { useTypedSelector } from '../../shared/utils/useTypedSelector'
+import { BYPASS_CORS_PROXY } from '../../config/axios'
+import { isValidURL } from '../../shared/utils/URL'
 import { Creators as TeamActions } from '../../store/ducks/teams'
-import { VALID_FORMATIONS, DEFAULT_TEAM } from './data'
+import { DEFAULT_TEAM, VALID_FORMATIONS } from './data'
 import IProps, { Formation, IViewProps } from './types'
 import View from './view'
-import { isValidURL } from '../../shared/utils/URL'
-import cogoToast from 'cogo-toast'
 
 function CreateTeamContainer(props: IProps): JSX.Element {
 	const dispatch = useDispatch()
 	const { addTeam: addTeamToStore } = TeamActions
 
-	const { teams } = useTypedSelector(['teams'])
+	// const { teams } = useTypedSelector(['teams'])
+
+	const [{ data, loading }, execute] = useAxios('/search', { manual: true })
 
 	const [team, setTeam] = useState(DEFAULT_TEAM)
 	const [inputsWithError, setInputsWithError] = useState<string[]>([])
+	const [availablePlayers, setAvailablePlayers] = useState([
+		{
+			player_name: 'Pelé',
+			nationality: 'Brazil',
+			age: 33
+		},
+		{
+			player_name: 'Ronaldo',
+			nationality: 'Noruega',
+			age: 55
+		},
+		{
+			player_name: 'Maradon',
+			nationality: 'Argentina',
+			age: 100
+		}
+	])
+	const [searchInput, setSearchInput] = useState('')
 
-	console.log({ inputsWithError })
+	console.log({ availablePlayers, data })
 
 	const updateTeam = (key: string) => (
 		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -76,16 +97,76 @@ function CreateTeamContainer(props: IProps): JSX.Element {
 		return !hasErrors
 	}
 
+	// const updateSearchInput = (e: ChangeEvent)
+
 	const getFormationString = (f: Formation) => f.filter(Boolean).join(' - ')
 
 	const getOption = (value: string) => ({ value, label: value })
 
 	const formations = VALID_FORMATIONS.map(getFormationString).map(getOption)
 
+	// const getPlayers = (x: string): any[] => {
+	// 	// execute({ url: `/search/${x}`}) as any
+	// 	return ['test']
+	// }
+
+	// const loadOptions = (
+	// 	inputValue: string,
+	// 	callback: (options: OptionsType<ISelectOption>) => void
+	// ) => {
+	// 	const endpoint = `https://www.api-football.com/demo/v2`
+
+	// 	const params = `players/search/${inputValue}`
+
+	// 	const url = `${BYPASS_CORS_PROXY}/${endpoint}/${params}`
+
+	// 	execute({ url }).then((x1) => {
+	// 		console.log('execute return', { x1 })
+	// 	})
+	// 	setTimeout(() => {
+	// 		callback(getPlayers(inputValue))
+	// 	}, 1000)
+	// }
+
+	const getPlayers = () => {
+		if (searchInput.length < 4) return
+
+		const endpoint = `https://www.api-football.com/demo/v2`
+
+		const params = `players/search/${searchInput}`
+
+		const url = `${BYPASS_CORS_PROXY}/${endpoint}/${params}`
+
+		execute({ url })
+	}
+
+	const reflectFetchedPlayers = () => {
+		if (!data?.api?.players?.length) return
+
+		const { players } = data.api
+
+		setAvailablePlayers(players)
+	}
+
+	const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const { value } = e.target
+
+		setSearchInput(value)
+	}
+
+	useEffect(getPlayers, [searchInput])
+
+	useEffect(reflectFetchedPlayers, [data])
+
 	const viewProps: IViewProps = {
-		team,
+		availablePlayers,
 		formations,
 		inputsWithError,
+		searchInput,
+		team,
+		handleSearchChange,
+		// loadOptions,
+		loading,
 		updateTeam,
 		saveTeam,
 		addTag,
