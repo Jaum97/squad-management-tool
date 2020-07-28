@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { MOCKED_LIST } from './data'
 import {
 	ItemName,
 	ItemValue,
@@ -9,20 +8,19 @@ import {
 	ListWrapper,
 	UnorderedList
 } from './styles'
+import { IProps } from './types'
 
-// import IProps from './types'
-
-function AverageList(props: any): JSX.Element {
-	const { title } = props
+function AverageList(props: IProps): JSX.Element {
+	const { title, list, action } = props
 
 	return (
 		<ListWrapper>
 			<ListTitle>{title}</ListTitle>
 			<UnorderedList>
-				{MOCKED_LIST.map((item, i) => (
-					<ListItem key={i}>
+				{list.map((item, i) => (
+					<ListItem key={i} onClick={action(item.name)}>
 						<ItemName>{item.name}</ItemName>
-						<ItemValue>{item.value}</ItemValue>
+						<ItemValue>{item.avgAge}</ItemValue>
 					</ListItem>
 				))}
 			</UnorderedList>

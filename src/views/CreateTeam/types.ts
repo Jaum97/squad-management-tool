@@ -3,8 +3,6 @@ import { ChangeEvent } from 'react'
 import { Team, Formation } from '../../shared/interfaces/team'
 import { IPlayer } from '../../shared/interfaces/player'
 
-export default interface IProps {}
-
 export interface IInputStyledProps {
 	invalid?: boolean
 }
@@ -23,12 +21,12 @@ export interface IViewProps {
 	searchInput: string
 	selectedPlayers: IPlayer[]
 	team: Team
-	selectPlayer: (player: IPlayer) => void
-	handleSearchChange: (e: ChangeEvent<HTMLInputElement>) => void
-	handleFormationChange: (val: any) => void
 	addTag: (value: string) => void
+	handleFormationChange: (val: any) => void
+	handleSearchChange: (e: ChangeEvent<HTMLInputElement>) => void
 	removeTag: (i: number) => () => void
 	saveTeam: () => void
+	selectPlayer: (player: IPlayer) => void
 	updateTeam: (
 		key: string
 	) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void

@@ -22,15 +22,12 @@ export const cardSource = {
 		return item
 	},
 
-	endDrag(props: any, monitor: any, component: any) {
-		if (!monitor.didDrop()) {
-			return
-		}
+	endDrag(_: any, monitor: any, component: any) {
+		if (!monitor.didDrop()) return
 
 		// When dropped on a compatible target, do something
 		const item = monitor.getItem()
 		const dropResult = monitor.getDropResult()
-		console.log({ id: item.id, dropResult })
 		// CardActions.moveCardToList(item.id, dropResult.listId)
 	}
 }

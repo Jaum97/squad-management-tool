@@ -9,11 +9,11 @@ import { isValidURL } from '../../shared/utils/URL'
 import { useTypedSelector } from '../../shared/utils/useTypedSelector'
 import { Creators as TeamActions } from '../../store/ducks/teams'
 import { VALID_FORMATIONS } from './data'
-import IProps, { IViewProps, ISelectOption } from './types'
+import { IViewProps, ISelectOption } from './types'
 import View from './view'
 import { IPlayer } from '../../shared/interfaces/player'
 
-function CreateTeamContainer(props: IProps): JSX.Element {
+function CreateTeamContainer(): JSX.Element {
 	const dispatch = useDispatch()
 	const { addTeam: addTeamToStore } = TeamActions
 
@@ -28,7 +28,7 @@ function CreateTeamContainer(props: IProps): JSX.Element {
 	const [availablePlayers, setAvailablePlayers] = useState<IPlayer[]>([])
 	const [selectedPlayers, setSelectedPlayers] = useState<IPlayer[]>([])
 	const [searchInput, setSearchInput] = useState('')
-	const [formation, setFormation] = useState<Formation>([3, 4, 3])
+	const [formation, setFormation] = useState(INITIAL_TEAM.formation)
 
 	const selectPlayer = (player: IPlayer) => {
 		setSelectedPlayers((p) => [...p, player])
@@ -41,8 +41,6 @@ function CreateTeamContainer(props: IProps): JSX.Element {
 
 		setAvailablePlayers((a) => a.filter((p) => !ids.includes(p.player_id)))
 	}
-
-	useEffect(removeSelectedPlayerFromAvailable, [selectedPlayers])
 
 	const updateTeam = (key: string) => (
 		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -73,7 +71,7 @@ function CreateTeamContainer(props: IProps): JSX.Element {
 
 		if (!isTeamValid) return
 
-		const teamToSave = { ...team, players: selectedPlayers }
+		const teamToSave = { ...team, players: selectedPlayers, formation }
 
 		dispatch(addTeamToStore(teamToSave))
 	}
@@ -142,8 +140,8 @@ function CreateTeamContainer(props: IProps): JSX.Element {
 	}
 
 	useEffect(getPlayers, [searchInput])
-
 	useEffect(reflectFetchedPlayers, [data])
+	useEffect(removeSelectedPlayerFromAvailable, [selectedPlayers])
 
 	const viewProps: IViewProps = {
 		availablePlayers,

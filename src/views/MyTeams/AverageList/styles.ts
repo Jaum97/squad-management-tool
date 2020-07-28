@@ -10,6 +10,7 @@ export const ListTitle = styled.h2`
 `
 
 export const ListItem = styled.div`
+	cursor: pointer;
 	background: white;
 	border-radius: 6px;
 	display: flex;
@@ -20,6 +21,12 @@ export const ListItem = styled.div`
 	padding: 12px 16px;
 	&:last-child {
 		margin-bottom: 0px;
+	}
+	&:hover {
+		box-shadow: inset -2px -2px 8px rgba(255, 255, 255, 1),
+			inset -2px -2px 12px rgba(255, 255, 255, 0.5),
+			inset 2px 2px 4px rgba(255, 255, 255, 0.1),
+			inset 2px 2px 8px rgba(0, 0, 0, 0.15);
 	}
 `
 

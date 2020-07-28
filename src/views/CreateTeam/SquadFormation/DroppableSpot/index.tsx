@@ -21,10 +21,6 @@ function DroppableSpot(props: IProps) {
 		player
 	)
 
-	if (player) {
-		console.log({ player, droppedPlayer })
-	}
-
 	const removePlayer = () => {
 		setDroppedPlayer(undefined)
 	}

@@ -3,8 +3,22 @@ import { Team } from '../../shared/interfaces/team'
 
 export default interface IProps {}
 
+interface HighlightPlayer {
+	name: string
+	percentage: number
+}
+
+export interface HighLightTeam {
+	avgAge: string
+	name: string
+}
+
 export interface IViewProps {
+	highestAvgAgeTeams: HighLightTeam[]
+	leastPicked: HighlightPlayer
+	lowestAvgAgeTeams: HighLightTeam[]
+	mostPicked: HighlightPlayer
 	teams: Team[]
-	editTeam: (teamName: string) => () => void
 	addTeam: () => void
+	editTeam: (teamName: string) => () => void
 }

@@ -27,9 +27,18 @@ import {
 } from './styles'
 import TeamTable from './TeamTable'
 import { IViewProps } from './types'
+import { getInitials } from '../../shared/utils/name'
 
 function MyTeams(props: IViewProps): JSX.Element {
-	const { teams, addTeam, editTeam } = props
+	const {
+		highestAvgAgeTeams,
+		leastPicked,
+		lowestAvgAgeTeams,
+		mostPicked,
+		teams,
+		addTeam,
+		editTeam
+	} = props
 
 	return (
 		<Content>
@@ -54,10 +63,18 @@ function MyTeams(props: IViewProps): JSX.Element {
 					</SectionHeader>
 					<Top5Body>
 						<ListContainer>
-							<AverageList title={'Highest avg age'} />
+							<AverageList
+								list={highestAvgAgeTeams}
+								action={editTeam}
+								title={'Highest avg age'}
+							/>
 						</ListContainer>
 						<ListContainer>
-							<AverageList title={'Lowest avg age'} />
+							<AverageList
+								list={lowestAvgAgeTeams}
+								action={editTeam}
+								title={'Lowest avg age'}
+							/>
 						</ListContainer>{' '}
 					</Top5Body>
 				</SectionContainer>
@@ -68,11 +85,16 @@ function MyTeams(props: IViewProps): JSX.Element {
 						<Player>
 							<AvatarTitle>{'Most picked player'}</AvatarTitle>
 							<BadgeContainer>
-								<PercentageBadge>{'75%'}</PercentageBadge>
+								<PercentageBadge>{`${mostPicked.percentage}%`}</PercentageBadge>
 							</BadgeContainer>
 							<MPPContainer>
 								<AvatarContainer>
-									<Avatar round name="Foo Bar" size="140" />
+									<Avatar
+										round
+										initials={getInitials}
+										name={mostPicked.name}
+										size="140"
+									/>
 								</AvatarContainer>
 							</MPPContainer>
 						</Player>
@@ -81,10 +103,15 @@ function MyTeams(props: IViewProps): JSX.Element {
 						<Player>
 							<AvatarTitle>{'Least picked player'}</AvatarTitle>
 							<BadgeContainer>
-								<PercentageBadge>{'25%'}</PercentageBadge>
+								<PercentageBadge>{`${leastPicked.percentage}%`}</PercentageBadge>
 							</BadgeContainer>
 							<AvatarContainer>
-								<Avatar round name="Foo Bar" size="140" />
+								<Avatar
+									round
+									initials={getInitials}
+									name={leastPicked.name}
+									size="140"
+								/>
 							</AvatarContainer>{' '}
 						</Player>
 					</RightSide>

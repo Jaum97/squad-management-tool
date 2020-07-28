@@ -7,7 +7,7 @@ import { Reducers } from './ducks'
 const persistConfig = {
 	key: 'Squad Management Tool Venturus',
 	storage,
-	whitelist: ['team']
+	whitelist: ['teams']
 }
 
 const persistedReducer: Reducer = persistReducer(persistConfig, Reducers)

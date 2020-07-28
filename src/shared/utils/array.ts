@@ -1,21 +1,32 @@
-export function mode(array: string[]): string {
-	const { length } = array
+export function mostFrequent(arr: string[]): string {
+	const { length } = arr
 
 	if (length === 0) return ''
 
-	var modeMap = {} as any
-	var mostOcurrencesEl = array[0]
+	var map = {} as { [key: string]: number }
+	var mostOcurrencesEl = arr[0]
 	var mostOcurrences = 1
 
 	for (var i = 0; i < length; i++) {
-		var el = array[i]
+		var el = arr[i]
 
-		modeMap[el] == null ? (modeMap[el] = 1) : modeMap[el]++
+		map[el] == null ? (map[el] = 1) : map[el]++
 
-		if (modeMap[el] > mostOcurrences) {
+		if (map[el] > mostOcurrences) {
 			mostOcurrencesEl = el
-			mostOcurrences = modeMap[el]
+			mostOcurrences = map[el]
 		}
 	}
 	return mostOcurrencesEl
+}
+
+export const leastFrequent = (arr: string[]) => {
+	const aux1 = arr.reduce(
+		(map, el) => map.set(el, (map.get(el) || 0) + 1),
+		new Map()
+	)
+
+	const result = [...(aux1 as any)].reduce((r, v) => (v[1] < r[1] ? v : r))[0]
+
+	return result
 }
