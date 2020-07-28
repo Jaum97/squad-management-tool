@@ -6,25 +6,27 @@ import { IProps } from './types'
 import FormationRow from './FormationRow'
 
 function SquadFormation(props: IProps) {
-	const { selectPlayer, formation, team } = props
+	const { selectPlayer, formation: fmt, team } = props
 
-	const { length: len } = formation
+	const { length: len } = fmt
 
-	const attackLen = formation[len - 1]
+	const formatted = len === 4 ? [fmt[0], fmt[1] + fmt[2], fmt[3]] : fmt
 
-	const middleRow1Len = formation[len - 2] > 3 ? formation[len - 2] - 3 : 0
+	const attackLen = formatted[2]
 
-	const middleRow2Len = formation[len - 2] > 3 ? 3 : formation[len - 2]
+	const middleRow1Len = formatted[1] > 3 ? formatted[1] - 3 : 0
 
-	const defenseRow1Len = formation[len - 3] > 3 ? formation[len - 3] - 3 : 0
+	const middleRow2Len = formatted[1] > 3 ? 3 : formatted[1]
 
-	const defenseRow2Len = formation[len - 2] > 3 ? 3 : formation[len - 2]
+	const defenseRow1Len = formatted[0] > 3 ? formatted[0] - 3 : 0
+
+	const defenseRow2Len = formatted[0] > 3 ? 3 : formatted[0]
 
 	const goalKeeper = 1
 
 	const { players } = team
 
-	const def = { selectPlayer, formation, players }
+	const def = { selectPlayer, formation: formatted, players }
 
 	return (
 		<TeamFormationContainer>

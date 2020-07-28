@@ -26,8 +26,8 @@ export const cardSource = {
 		if (!monitor.didDrop()) return
 
 		// When dropped on a compatible target, do something
-		const item = monitor.getItem()
-		const dropResult = monitor.getDropResult()
+		// const item = monitor.getItem()
+		// const dropResult = monitor.getDropResult()
 		// CardActions.moveCardToList(item.id, dropResult.listId)
 	}
 }
