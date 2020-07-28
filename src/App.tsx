@@ -1,6 +1,8 @@
 import { configure } from 'axios-hooks'
 import React, { StrictMode } from 'react'
 import { ConfigProvider } from 'react-avatar'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
@@ -21,6 +23,19 @@ import { ResetDefaultStyles } from './styles/defaults'
 
 library.add(faSort, faSortUp, faSortDown, faPencilAlt, faTrash, faShareAlt)
 
+/**
+ * Specifies which props to inject into your component.
+ */
+export function collect(connect: any, monitor: any) {
+	return {
+		// Call this function inside render()
+		// to let React DnD handle the drag events:
+		connectDragSource: connect.dragSource(),
+		// You can ask the monitor about the current drag state:
+		isDragging: monitor.isDragging()
+	}
+}
+
 function App(): JSX.Element {
 	configure({ axios: axiosInstance, cache: cacheInstance })
 
@@ -31,9 +46,11 @@ function App(): JSX.Element {
 			<ResetDefaultStyles />
 			<Provider store={store}>
 				<PersistGate persistor={persistor}>
-					<ConfigProvider colors={avatarColors}>
-						<Routes />
-					</ConfigProvider>
+					<DndProvider backend={HTML5Backend}>
+						<ConfigProvider colors={avatarColors}>
+							<Routes />
+						</ConfigProvider>
+					</DndProvider>
 				</PersistGate>
 			</Provider>
 		</StrictMode>

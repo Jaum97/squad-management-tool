@@ -11,6 +11,7 @@ import {
 	SectionTitle,
 	TeamButtonText
 } from '../MyTeams/styles'
+import PlayerCard from './PlayerCard'
 import SquadFormation from './SquadFormation'
 import {
 	ColumnContainer,
@@ -28,29 +29,35 @@ import {
 	Wrapper
 } from './styles'
 import InputTag from './TagInput'
-import { IViewProps } from './types'
-import PlayerCard from './PlayerCard'
+import { IViewProps, ISelectOption } from './types'
+import { Formation } from '../../shared/interfaces/team'
 
 function CreateTeam(props: IViewProps): JSX.Element {
 	const {
+		availablePlayers,
+		formation,
 		formations,
 		inputsWithError,
-		team,
-		availablePlayers,
-		handleSearchChange,
-		searchInput,
 		loading,
-		// loadOptions,
+		searchInput,
+		team,
 		addTag,
+		handleFormationChange,
+		handleSearchChange,
 		removeTag,
 		saveTeam,
+		selectPlayer,
 		updateTeam
 	} = props
+
 	const history = useHistory()
 
-	// const { tags } = team
-
 	const isInvalid = (x: string) => inputsWithError.includes(x)
+
+	const getFormationOption = (value: Formation): ISelectOption => ({
+		value,
+		label: value.join(' - ')
+	})
 
 	return (
 		<Content>
@@ -72,8 +79,8 @@ function CreateTeam(props: IViewProps): JSX.Element {
 								</InputTitle>
 								<Input
 									invalid={isInvalid('name')}
-									placeholder="Insert team name"
 									onChange={updateTeam('name')}
+									placeholder="Insert team name"
 									value={team.name}
 								/>
 							</InputContainer>
@@ -81,10 +88,10 @@ function CreateTeam(props: IViewProps): JSX.Element {
 							<InputContainer>
 								<InputTitle>{'Description'}</InputTitle>
 								<Textarea
-									rows={12}
 									cols={10}
 									maxLength={100}
 									onChange={updateTeam('description')}
+									rows={12}
 									value={team.description}
 								/>
 							</InputContainer>
@@ -97,8 +104,8 @@ function CreateTeam(props: IViewProps): JSX.Element {
 								</InputTitle>
 								<Input
 									invalid={isInvalid('website')}
-									placeholder="http://myteam.com"
 									onChange={updateTeam('website')}
+									placeholder="http://myteam.com"
 									value={team.website}
 								/>
 							</InputContainer>
@@ -107,15 +114,15 @@ function CreateTeam(props: IViewProps): JSX.Element {
 								<InputTitle>{'Team type'}</InputTitle>
 								<RadioButtonsContainer>
 									<RadioButton
-										text="Real"
-										onChange={updateTeam('type')}
 										checked={team.type === 'real'}
+										onChange={updateTeam('type')}
+										text="Real"
 									/>
 									<Spacer />
 									<RadioButton
-										text="Fantasy"
-										onChange={updateTeam('type')}
 										checked={team.type === 'fantasy'}
+										onChange={updateTeam('type')}
+										text="Fantasy"
 									/>
 								</RadioButtonsContainer>
 							</TypeContainer>
@@ -123,9 +130,9 @@ function CreateTeam(props: IViewProps): JSX.Element {
 							<TagsContainer>
 								<InputTitle>{'Tags'}</InputTitle>
 								<InputTag
-									tags={team.tags}
 									addTag={addTag}
 									removeTag={removeTag}
+									tags={team.tags}
 								/>
 							</TagsContainer>
 						</ColumnContainer>
@@ -136,22 +143,35 @@ function CreateTeam(props: IViewProps): JSX.Element {
 					<RowContainer>
 						<ColumnContainer>
 							<p>Formation</p>
-							<Select options={formations} />
-							<SquadFormation />
+							<Select
+								onChange={handleFormationChange}
+								options={formations}
+								value={getFormationOption(formation)}
+							/>
+							<SquadFormation
+								team={team}
+								formation={formation}
+								selectPlayer={selectPlayer}
+							/>
 							<SaveButton onClick={saveTeam}>{'Save'}</SaveButton>
 						</ColumnContainer>
 
 						<ColumnContainer>
 							<p>Search Players</p>
 							<Input
-								placeholder="Search"
 								onChange={handleSearchChange}
+								placeholder="Search"
 								value={searchInput}
 							/>
 							{loading ? (
 								<p>Loading ...</p>
 							) : availablePlayers.length ? (
-								availablePlayers.map(PlayerCard)
+								availablePlayers.map(
+									(props, i) =>
+										(
+											<PlayerCard key={i} {...props} />
+										) as any
+								)
 							) : (
 								<p>
 									{searchInput.length

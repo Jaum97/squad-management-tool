@@ -1,5 +1,8 @@
 import { ChangeEvent } from 'react'
 
+import { Team, Formation } from '../../shared/interfaces/team'
+import { IPlayer } from '../../shared/interfaces/player'
+
 export default interface IProps {}
 
 export interface IInputStyledProps {
@@ -8,37 +11,25 @@ export interface IInputStyledProps {
 
 export interface ISelectOption {
 	label: string
-	value: string
+	value: Formation
 }
 
 export interface IViewProps {
 	availablePlayers: any[]
+	formation: Formation
 	formations: ISelectOption[]
 	inputsWithError: string[]
-	searchInput: string
-	team: ITeam
 	loading: boolean
+	searchInput: string
+	selectedPlayers: IPlayer[]
+	team: Team
+	selectPlayer: (player: IPlayer) => void
 	handleSearchChange: (e: ChangeEvent<HTMLInputElement>) => void
-	// loadOptions: (
-	// 	inputValue: string,
-	// 	callback: (options: OptionsType<ISelectOption>) => void
-	// ) => void
+	handleFormationChange: (val: any) => void
 	addTag: (value: string) => void
 	removeTag: (i: number) => () => void
 	saveTeam: () => void
 	updateTeam: (
 		key: string
 	) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
-}
-
-export type Formation = [number, number, number, number]
-
-export interface ITeam {
-	name: string
-	description: string
-	website: string
-	type: 'fantasy' | 'real'
-	tags: string[]
-	formation: Formation
-	formationLayout: string
 }

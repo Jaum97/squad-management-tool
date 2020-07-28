@@ -1,43 +1,48 @@
 import useAxios from 'axios-hooks'
-import cogoToast from 'cogo-toast'
 import { ChangeEvent, createElement, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { BYPASS_CORS_PROXY } from '../../config/axios'
+import { Formation, Team } from '../../shared/interfaces/team'
+import { displayError } from '../../shared/utils/cogoToast'
 import { isValidURL } from '../../shared/utils/URL'
+import { useTypedSelector } from '../../shared/utils/useTypedSelector'
 import { Creators as TeamActions } from '../../store/ducks/teams'
-import { DEFAULT_TEAM, VALID_FORMATIONS } from './data'
-import IProps, { Formation, IViewProps } from './types'
+import { VALID_FORMATIONS } from './data'
+import IProps, { IViewProps, ISelectOption } from './types'
 import View from './view'
+import { IPlayer } from '../../shared/interfaces/player'
 
 function CreateTeamContainer(props: IProps): JSX.Element {
 	const dispatch = useDispatch()
 	const { addTeam: addTeamToStore } = TeamActions
 
+	const { teamToEdit } = useTypedSelector(['teamToEdit'])
+
 	const [{ data, loading }, execute] = useAxios('/search', { manual: true })
 
-	const [team, setTeam] = useState(DEFAULT_TEAM)
+	const INITIAL_TEAM = teamToEdit.name ? teamToEdit : new Team()
+
+	const [team, setTeam] = useState(INITIAL_TEAM)
 	const [inputsWithError, setInputsWithError] = useState<string[]>([])
-	const [availablePlayers, setAvailablePlayers] = useState([])
+	const [availablePlayers, setAvailablePlayers] = useState<IPlayer[]>([])
+	const [selectedPlayers, setSelectedPlayers] = useState<IPlayer[]>([])
 	const [searchInput, setSearchInput] = useState('')
+	const [formation, setFormation] = useState<Formation>([3, 4, 3])
 
-	// const mocked = [	{
-	// 	player_name: 'Pelé',
-	// 	nationality: 'Brazil',
-	// 	age: 33
-	// },
-	// {
-	// 	player_name: 'Ronaldo',
-	// 	nationality: 'Noruega',
-	// 	age: 55
-	// },
-	// {
-	// 	player_name: 'Maradon',
-	// 	nationality: 'Argentina',
-	// 	age: 100
-	// }]
+	const selectPlayer = (player: IPlayer) => {
+		setSelectedPlayers((p) => [...p, player])
+	}
 
-	console.log({ availablePlayers, data })
+	const removeSelectedPlayerFromAvailable = () => {
+		if (!selectedPlayers.length) return
+
+		const ids = selectedPlayers.map((p) => p.player_id)
+
+		setAvailablePlayers((a) => a.filter((p) => !ids.includes(p.player_id)))
+	}
+
+	useEffect(removeSelectedPlayerFromAvailable, [selectedPlayers])
 
 	const updateTeam = (key: string) => (
 		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -68,7 +73,9 @@ function CreateTeamContainer(props: IProps): JSX.Element {
 
 		if (!isTeamValid) return
 
-		dispatch(addTeamToStore(team))
+		const teamToSave = { ...team, players: selectedPlayers }
+
+		dispatch(addTeamToStore(teamToSave))
 	}
 
 	const validateTeam = () => {
@@ -84,10 +91,7 @@ function CreateTeamContainer(props: IProps): JSX.Element {
 		const hasErrors = Boolean(withError.length)
 
 		if (hasErrors) {
-			cogoToast.error(
-				'Failed to save team, please check highlighted inputs',
-				{ position: 'top-right' }
-			)
+			displayError('Failed to save team, please check highlighted inputs')
 		}
 
 		setInputsWithError(withError)
@@ -95,13 +99,12 @@ function CreateTeamContainer(props: IProps): JSX.Element {
 		return !hasErrors
 	}
 
-	// const updateSearchInput = (e: ChangeEvent)
+	const getOption = (value: Formation) => ({
+		value,
+		label: value.join(' - ')
+	})
 
-	const getFormationString = (f: Formation) => f.filter(Boolean).join(' - ')
-
-	const getOption = (value: string) => ({ value, label: value })
-
-	const formations = VALID_FORMATIONS.map(getFormationString).map(getOption)
+	const formations = VALID_FORMATIONS.map(getOption)
 
 	const getPlayers = () => {
 		if (searchInput.length < 4) return
@@ -129,23 +132,35 @@ function CreateTeamContainer(props: IProps): JSX.Element {
 		setSearchInput(value)
 	}
 
+	const handleFormationChange = (opt: ISelectOption) => {
+		const { value } = opt
+
+		setSelectedPlayers([])
+		setTeam((t) => ({ ...t, players: [] }))
+
+		setFormation(value)
+	}
+
 	useEffect(getPlayers, [searchInput])
 
 	useEffect(reflectFetchedPlayers, [data])
 
 	const viewProps: IViewProps = {
 		availablePlayers,
+		formation,
 		formations,
 		inputsWithError,
-		searchInput,
-		team,
-		handleSearchChange,
-		// loadOptions,
 		loading,
-		updateTeam,
-		saveTeam,
+		searchInput,
+		selectedPlayers,
+		team,
 		addTag,
-		removeTag
+		handleFormationChange,
+		handleSearchChange,
+		removeTag,
+		saveTeam,
+		selectPlayer,
+		updateTeam
 	}
 
 	return createElement(View, viewProps)

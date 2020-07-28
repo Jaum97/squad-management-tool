@@ -85,6 +85,9 @@ export const Input = styled.input<IInputStyledProps>`
 	border: solid 1px ${({ invalid: i }) => (i ? colors.secondary : '#d1d1d1')};
 	color: #d1d1d1;
 	border-radius: 3px;
+	&:valid {
+		color: ${colors.darkGrey};
+	}
 `
 
 export const Textarea = styled.textarea`
@@ -108,33 +111,6 @@ export const Tag = styled.span`
 	padding: 4px 8px;
 	font-size: 12px;
 	color: white;
-`
-
-export const PlaceholderContainer = styled.div`
-	align-items: center;
-	border-radius: 50%;
-	border: 1px dashed grey;
-	display: flex;
-	flex-direction: column;
-	height: 88px;
-	justify-content: center;
-	margin: 16px 0px;
-	width: 88px;
-`
-
-export const PlayerPlaceholder = styled.div`
-	background: #eeeeee80;
-
-	display: flex;
-	color: white;
-	box-shadow: 1px 1px 1px #00000050;
-	font-size: 24px;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	height: 80px;
-	width: 80px;
-	border-radius: 50%;
 `
 
 export const TeamFormationContainer = styled(GradientSectionContainer)`

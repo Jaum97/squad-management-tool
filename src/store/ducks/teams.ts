@@ -1,11 +1,16 @@
 // import { Action } from 'redux'
 import { createActions, createReducer } from 'reduxsauce'
 
-const INITIAL_STATE: any = []
+import { Team } from '../../shared/interfaces/team'
 
-const add = (state = INITIAL_STATE, action: any) => [...state, action.team]
+const INITIAL_STATE: Team[] = []
 
-const remove = (state = INITIAL_STATE, action: any) => INITIAL_STATE
+const add = (state = INITIAL_STATE, action: { team: Team }) => [
+	...state,
+	action.team
+]
+
+const remove = (state = INITIAL_STATE) => INITIAL_STATE
 
 const actions = {
 	addTeam: ['team'],

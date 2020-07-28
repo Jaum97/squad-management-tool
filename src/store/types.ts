@@ -1,7 +1,9 @@
 import { Maybe } from '../shared/interfaces/common'
+import { Team } from '../shared/interfaces/team'
 
 export interface IStore {
-	teams: any[]
+	teams: Team[]
+	teamToEdit: Team
 }
 
 export type SelectorEqualityFn<K extends keyof IStore> = Maybe<

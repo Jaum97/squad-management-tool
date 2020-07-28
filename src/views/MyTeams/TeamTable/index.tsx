@@ -1,9 +1,8 @@
-import cogoToast from 'cogo-toast'
 import React, { useState } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { MOCKED_DATA } from './data'
+import { displayError, displaySuccess } from '../../../shared/utils/cogoToast'
 import {
 	CellContentWrapper,
 	CellIcon,
@@ -16,18 +15,18 @@ import {
 	TableHeaderRow,
 	TableWrapper
 } from './styles'
-import { ISortBy } from './types'
+import { IProps, ISortBy } from './types'
 
-const cogoOpts = { position: 'top-right' as 'top-right' }
+function TeamTable(props: IProps): JSX.Element {
+	const { teams, editTeam } = props
 
-function TeamTable(): JSX.Element {
 	const DEFAULT_SORTING: ISortBy = {
 		header: 'name',
 		order: 'asc'
 	}
 
 	const [sortBy, setSortBy] = useState(DEFAULT_SORTING)
-	const [list, setList] = useState(MOCKED_DATA)
+	const [list, setList] = useState(teams)
 
 	const sortFn = (a: any, b: any) => {
 		const { header, order } = sortBy
@@ -65,13 +64,13 @@ function TeamTable(): JSX.Element {
 	}
 
 	const share = () => {
-		cogoToast.error('Feature not yet implemented :/', cogoOpts)
+		displayError('Feature not yet implemented :/')
 	}
 
 	const deleteTeam = (i: number) => () => {
 		setList((l) => l.filter((_, i2) => i2 !== i))
 
-		cogoToast.success('Team deleted successfully', cogoOpts)
+		displaySuccess('Team deleted successfully')
 	}
 
 	return (
@@ -111,7 +110,7 @@ function TeamTable(): JSX.Element {
 										data-tip="Share"
 									/>
 									<CellIcon
-										onClick={() => console.log('3')}
+										onClick={editTeam(item.name)}
 										icon="pencil-alt"
 										data-tip="Edit"
 									/>

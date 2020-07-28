@@ -1,12 +1,12 @@
 import { combineReducers, Reducer, ReducersMapObject } from 'redux'
 
 import { IStore } from '../types'
-// import { IActionsCreators } from '../../interfaces/action'
-// import { IStore } from '../../interfaces/store'
 import teams from './teams'
+import teamToEdit from './teamToEdit'
 
 const reducers: ReducersMapObject<IStore> = {
-	teams
+	teams,
+	teamToEdit
 }
 
 export const Reducers: Reducer = combineReducers(reducers)

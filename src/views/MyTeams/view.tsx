@@ -1,7 +1,6 @@
 import React from 'react'
 import Avatar from 'react-avatar'
 
-import { routesEnum } from '../../routes/enum'
 import AverageList from './AverageList'
 import {
 	AddTeamButton,
@@ -30,9 +29,7 @@ import TeamTable from './TeamTable'
 import { IViewProps } from './types'
 
 function MyTeams(props: IViewProps): JSX.Element {
-	const { navigateTo } = props
-
-	const onClick = navigateTo(routesEnum.CREATE_TEAM as 'CREATE_TEAM')
+	const { teams, addTeam, editTeam } = props
 
 	return (
 		<Content>
@@ -40,12 +37,12 @@ function MyTeams(props: IViewProps): JSX.Element {
 				<SectionContainer>
 					<SectionHeader>
 						<SectionTitle>{'My teams'}</SectionTitle>
-						<AddTeamButton onClick={onClick}>
+						<AddTeamButton onClick={addTeam}>
 							<TeamButtonText>{'+'}</TeamButtonText>
 						</AddTeamButton>
 					</SectionHeader>
 					<TeamsBody>
-						<TeamTable />
+						<TeamTable teams={teams} editTeam={editTeam} />
 					</TeamsBody>
 				</SectionContainer>
 			</WrapperLeft>
