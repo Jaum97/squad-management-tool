@@ -10,6 +10,7 @@ import {
 	PlayerCardContainer,
 	PlayerField
 } from './styles'
+import { IPlayer } from '../../../shared/interfaces/player'
 
 /**
  * Specifies the drag source contract.
@@ -32,7 +33,7 @@ export const cardSource = {
 	}
 }
 
-function PlayerCard(props: any) {
+function PlayerCard(props: IPlayer & { connectDragSource: any }) {
 	const { player_name, nationality, age } = props
 
 	// These two props are injected by React DnD,
@@ -40,11 +41,11 @@ function PlayerCard(props: any) {
 	const { connectDragSource } = props
 
 	const [, dragRef] = useDrag({
-		item: { type: DraggableTypes.CARD, player: props },
+		item: { type: DraggableTypes.CARD, player: props }
 
-		collect: (monitor) => ({
-			// opacity: monitor.isDragging() ? 0.5 : 1
-		})
+		// collect: (monitor) => ({
+		// 	 opacity: monitor.isDragging() ? 0.5 : 1
+		// })
 	})
 
 	return connectDragSource(

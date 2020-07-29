@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { colors } from '../../../../styles/colors'
 
 export const AvatarContainer = styled.div`
+	z-index: 1;
 	background: ${colors.secondary};
 	display: flex;
 	align-items: center;
@@ -21,12 +22,12 @@ export const PlaceholderContainer = styled.div`
 	flex-direction: column;
 	height: 88px;
 	justify-content: center;
-	margin: 16px 0px;
 	width: 88px;
 `
 
 export const PlayerPlaceholder = styled.div`
 	background: #eeeeee80;
+	z-index: 1;
 
 	display: flex;
 	color: white;

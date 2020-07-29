@@ -4,8 +4,8 @@ import { Maybe } from '../../../../shared/interfaces/common'
 
 export interface IProps {
 	row: number
-	column: number
+	col: number
 	formation: number[]
-	player: Maybe<ITeamPlayer>
+	editingPlayer: Maybe<ITeamPlayer>
 	selectPlayer: (player: IPlayer) => void
 }

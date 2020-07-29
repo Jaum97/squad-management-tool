@@ -12,25 +12,28 @@ function FormationRow(props: IProps) {
 	const getPosition = (col: number) => [row, col]
 
 	const isSamePosition = (col: number) => (player: ITeamPlayer) => {
+		const { position: playerPosition = [] } = player
+
 		const position = getPosition(col)
 
 		const matchesPlace = (p: number, i: number) => p === position[i]
 
-		return player?.position.every(matchesPlace)
+		return playerPosition.every(matchesPlace)
 	}
 
+	// when editing this finds the player position inside the team
 	const findPlayer = (col: number) => players.find(isSamePosition(col))
+
+	const spotParams = { row, selectPlayer, formation }
 
 	return (
 		<FormationSectionContainer>
 			{arr.map((_, col) => (
 				<DroppableSpot
-					column={col}
-					formation={formation}
+					col={col}
 					key={col}
-					player={findPlayer(col)}
-					row={row}
-					selectPlayer={selectPlayer}
+					editingPlayer={findPlayer(col)}
+					{...spotParams}
 				/>
 			))}
 		</FormationSectionContainer>

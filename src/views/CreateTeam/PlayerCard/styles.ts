@@ -8,7 +8,7 @@ export const PlayerCardContainer = styled.div`
 	border: 1px dashed #cccccc;
 	display: flex;
 	flex-direction: row;
-	width: 100%;
+	max-width: 100%;
 	align-items: center;
 	justify-content: space-between;
 	margin: 8px 0px;

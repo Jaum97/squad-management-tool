@@ -10,6 +10,9 @@ body {
 	padding: 0px;
 	width: 100%;
   	font-family:  'Bahij_SultanNahia', sans-serif;
+	  @media (max-width: 768px) {
+		font-size: 14px;
+	}
 }
   * {
     outline: 0;

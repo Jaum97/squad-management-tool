@@ -13,12 +13,12 @@ import { ITeamPlayer } from '../../../../shared/interfaces/team'
 import { Maybe } from '../../../../shared/interfaces/common'
 
 function DroppableSpot(props: IProps) {
-	const { selectPlayer, row, column, formation, player } = props
+	const { selectPlayer, row, col, formation, editingPlayer } = props
 
-	const position = [row, column]
+	const position = [row, col]
 
 	const [droppedPlayer, setDroppedPlayer] = useState<Maybe<ITeamPlayer>>(
-		player
+		editingPlayer
 	)
 
 	const removePlayer = () => {
@@ -31,6 +31,7 @@ function DroppableSpot(props: IProps) {
 		accept: DraggableTypes.CARD,
 		drop: ({ player }: any) => {
 			const teamPlayer = { ...player, position }
+
 			setDroppedPlayer(teamPlayer)
 			selectPlayer(teamPlayer)
 		},
@@ -40,7 +41,7 @@ function DroppableSpot(props: IProps) {
 		})
 	})
 
-	const thisPlayer = droppedPlayer || player
+	const thisPlayer = droppedPlayer || editingPlayer
 
 	const hasPlayer = Boolean(thisPlayer)
 

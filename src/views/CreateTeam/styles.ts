@@ -1,19 +1,17 @@
 import styled from 'styled-components'
 
 import { colors } from '../../styles/colors'
-import { GradientSectionContainer } from '../MyTeams/styles'
 import { IInputStyledProps } from './types'
+import Select from 'react-select'
+import { breakPoints } from '../../styles/grid'
 
 export const Wrapper = styled.div`
 	align-items: center;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: center;
 	padding: 16px;
-	width: 100%;
-	@media (max-width: 800px) {
-		width: 100%;
-	}
+	margin: 0px 16px;
 `
 
 export const RowContainer = styled.div`
@@ -21,6 +19,9 @@ export const RowContainer = styled.div`
 	flex-direction: row;
 	width: 100%;
 	padding: 16px 0px;
+	@media (max-width: ${breakPoints.sm}px) {
+		display: column;
+	}
 `
 
 export const ColumnContainer = styled.div`
@@ -29,13 +30,15 @@ export const ColumnContainer = styled.div`
 	margin: 0px 8px;
 	padding: 0px 64px;
 	&:first-child {
-		padding-left: 128px;
+		padding-left: 8rem;
 	}
 	&:last-child {
-		padding-right: 128px;
+		padding-right: 8rem;
 	}
-
 	width: 50%;
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 `
 
 export const Title = styled.h1`
@@ -97,6 +100,9 @@ export const Textarea = styled.textarea`
 	border: solid 1px #d1d1d1;
 	color: #d1d1d1;
 	border-radius: 3px;
+	&:valid {
+		color: ${colors.darkGrey};
+	}
 `
 
 export const TextAreaContainer = styled.div`
@@ -113,11 +119,6 @@ export const Tag = styled.span`
 	color: white;
 `
 
-export const TeamFormationContainer = styled(GradientSectionContainer)`
-	flex-direction: column;
-	margin: 16px 0px;
-`
-
 export const FormationSectionContainer = styled.div`
 	display: flex;
 	width: 100%;
@@ -125,7 +126,14 @@ export const FormationSectionContainer = styled.div`
 	justify-content: space-around;
 `
 
+export const CenterFormationSectionContainer = styled(
+	FormationSectionContainer
+)`
+	margin-top: 12px;
+`
+
 export const SaveButton = styled.button`
+	width: 100%;
 	border-radius: 3px;
 	border: 1px solid #c43583;
 	background: linear-gradient(#c43583, #592880);
@@ -140,4 +148,41 @@ export const SaveButton = styled.button`
 			inset 2px 2px 4px rgba(135, 53, 131, 0.1),
 			inset 2px 2px 8px rgba(0, 0, 0, 0.15);
 	}
+`
+
+export const SelectTitle = styled.h2`
+	color: ${colors.darkGrey};
+	font-size: 14px;
+	margin-right: 12px;
+`
+
+export const FormationSelectContainer = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+`
+
+export const FormationSelect = styled(Select)`
+	min-width: 164px;
+`
+
+export const SaveButtonContainer = styled.div`
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+`
+
+export const PlayerCardsContainer = styled.div<{ border: boolean }>`
+	border-bottom: 1px solid
+		${({ border: b }) => (b ? '#d1d1d1' : 'transparent')};
+	max-height: 740px;
+	overflow-y: clip;
+	overflow-x: hidden;
+`
+
+export const SearchPlayerInputContainer = styled.div`
+	display: flex;
+	flex-direction: row;
+	width: 100%;
 `
