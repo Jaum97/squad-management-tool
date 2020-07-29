@@ -70,7 +70,9 @@ function MyTeamsContainer(props: IProps): JSX.Element {
 	}
 
 	const initHighLightTeams = () => {
-		const averages = teams.map((t) => ({
+		const hasPlayers = (t: Team) => t.players.length
+
+		const averages = teams.filter(hasPlayers).map((t) => ({
 			name: t.name,
 			avgAge: getTeamAverageAge(t)
 		}))

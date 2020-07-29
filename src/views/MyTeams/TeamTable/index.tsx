@@ -6,7 +6,6 @@ import { displayError, displaySuccess } from '../../../shared/utils/cogoToast'
 import {
 	CellContentWrapper,
 	CellIcon,
-	CellToolTip,
 	HeaderContentWrapper,
 	TableBody,
 	TableBodyRow,
@@ -114,7 +113,6 @@ function TeamTable(props: IProps): JSX.Element {
 										icon="pencil-alt"
 										data-tip="Edit"
 									/>
-									<CellToolTip />
 								</div>
 							</CellContentWrapper>
 						</TableCell>

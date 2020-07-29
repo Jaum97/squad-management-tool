@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import Avatar from 'react-avatar'
 import { useDrop } from 'react-dnd'
 
@@ -11,6 +11,7 @@ import {
 import { IProps } from './types'
 import { ITeamPlayer } from '../../../../shared/interfaces/team'
 import { Maybe } from '../../../../shared/interfaces/common'
+import ReactTooltip from 'react-tooltip'
 
 function DroppableSpot(props: IProps) {
 	const { selectPlayer, row, col, formation, editingPlayer } = props
@@ -50,11 +51,20 @@ function DroppableSpot(props: IProps) {
 		  (thisPlayer as ITeamPlayer).lastname
 		: ''
 
+	const playerInfo = thisPlayer
+		? [thisPlayer.nationality, thisPlayer.player_name].join('\n')
+		: undefined
+	// playerInfo ? (
+	// 	<ul>
+	// 		<li>thisPlayer.player_name</li>
+	// 		<li>thisPlayer.player_name</li>
+	// 	</ul>
+	// ) : null
 	return (
-		<div ref={drop}>
+		<div data-tip={name} ref={drop}>
 			{hasPlayer ? (
 				<AvatarContainer>
-					<Avatar round name={name} size="88" />
+					<Avatar title=" " round name={name} size="88" />
 				</AvatarContainer>
 			) : (
 				<PlaceholderContainer>

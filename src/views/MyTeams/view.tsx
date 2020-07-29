@@ -3,12 +3,10 @@ import Avatar from 'react-avatar'
 
 import AverageList from './AverageList'
 import {
-	AddTeamButton,
 	AvatarContainer,
 	AvatarTitle,
 	BadgeContainer,
 	CircleOutline,
-	Content,
 	GradientSectionContainer,
 	LeftSide,
 	ListContainer,
@@ -16,21 +14,17 @@ import {
 	PercentageBadge,
 	Player,
 	RightSide,
-	SectionContainer,
-	SectionHeader,
-	SectionTitle,
-	TeamButtonText,
 	TeamsBody,
 	Top5Body,
 	WrapperLeft,
 	WrapperRight,
-	Placeholder,
-	TransparentWrapper
+	Placeholder
 } from './styles'
 import TeamTable from './TeamTable'
 import { IViewProps } from './types'
 import { getInitials } from '../../shared/utils/name'
 import { Column } from '../../styles/grid'
+import WhiteSection from '../../components/WhiteSection'
 
 function MyTeams(props: IViewProps): JSX.Element {
 	const {
@@ -47,13 +41,7 @@ function MyTeams(props: IViewProps): JSX.Element {
 		<Column>
 			<Column sm="12" md="6" lg="6">
 				<WrapperLeft>
-					<SectionContainer>
-						<SectionHeader>
-							<SectionTitle>{'My teams'}</SectionTitle>
-							<AddTeamButton onClick={addTeam}>
-								<TeamButtonText>{'+'}</TeamButtonText>
-							</AddTeamButton>
-						</SectionHeader>
+					<WhiteSection title="My teams" onClick={addTeam}>
 						<TeamsBody>
 							{teams.length ? (
 								<TeamTable teams={teams} editTeam={editTeam} />
@@ -63,16 +51,13 @@ function MyTeams(props: IViewProps): JSX.Element {
 								</Placeholder>
 							)}
 						</TeamsBody>
-					</SectionContainer>
+					</WhiteSection>
 				</WrapperLeft>
 			</Column>
 
 			<Column sm="12" md="6" lg="6">
 				<WrapperRight>
-					<SectionContainer>
-						<SectionHeader>
-							<SectionTitle>{'Top 5'}</SectionTitle>
-						</SectionHeader>
+					<WhiteSection title="Top 5">
 						{teams.length ? (
 							<Top5Body>
 								<ListContainer>
@@ -95,7 +80,7 @@ function MyTeams(props: IViewProps): JSX.Element {
 								{"You don't have any teams yet"}
 							</Placeholder>
 						)}
-					</SectionContainer>
+					</WhiteSection>
 					<GradientSectionContainer>
 						<CircleOutline />
 						<LeftSide>

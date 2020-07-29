@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { colors } from '../../styles/colors'
 import { IInputStyledProps } from './types'
 import Select from 'react-select'
-import { breakPoints } from '../../styles/grid'
 
 export const Wrapper = styled.div`
 	align-items: center;
@@ -19,8 +18,35 @@ export const RowContainer = styled.div`
 	flex-direction: row;
 	width: 100%;
 	padding: 16px 0px;
-	@media (max-width: ${breakPoints.sm}px) {
-		display: column;
+`
+
+export const SquadInfoContainer = styled(RowContainer)`
+	@media (max-width: 992px) {
+		flex-direction: row-reverse;
+		width: auto;
+		flex-direction: column-reverse;
+		justify-content: center;
+		align-items: center;
+	}
+`
+
+export const TeamInfoContainer = styled(RowContainer)`
+	@media (max-width: 992px) {
+		flex-direction: row;
+		width: auto;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+`
+
+export const Center = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	@media (max-width: 560px) {
+		width: auto;
 	}
 `
 
@@ -28,16 +54,20 @@ export const ColumnContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin: 0px 8px;
+
 	padding: 0px 64px;
-	&:first-child {
-		padding-left: 8rem;
-	}
-	&:last-child {
-		padding-right: 8rem;
-	}
+
 	width: 50%;
-	@media (max-width: 768px) {
+	@media (max-width: 992px) {
 		width: 100%;
+	}
+	@media (min-width: 1200px) {
+		&:first-child {
+			padding-left: 8rem;
+		}
+		&:last-child {
+			padding-right: 8rem;
+		}
 	}
 `
 
@@ -91,6 +121,9 @@ export const Input = styled.input<IInputStyledProps>`
 	&:valid {
 		color: ${colors.darkGrey};
 	}
+	@media (max-width: 560px) {
+		padding: 6px 0px;
+	}
 `
 
 export const Textarea = styled.textarea`
@@ -102,6 +135,9 @@ export const Textarea = styled.textarea`
 	border-radius: 3px;
 	&:valid {
 		color: ${colors.darkGrey};
+	}
+	@media (max-width: 560px) {
+		padding: 6px 0px;
 	}
 `
 
@@ -148,6 +184,9 @@ export const SaveButton = styled.button`
 			inset 2px 2px 4px rgba(135, 53, 131, 0.1),
 			inset 2px 2px 8px rgba(0, 0, 0, 0.15);
 	}
+	@media (max-width: 992px) {
+		opacity: 0;
+	}
 `
 
 export const SelectTitle = styled.h2`
@@ -165,6 +204,7 @@ export const FormationSelectContainer = styled.div`
 
 export const FormationSelect = styled(Select)`
 	min-width: 164px;
+	z-index: 4;
 `
 
 export const SaveButtonContainer = styled.div`
@@ -174,15 +214,49 @@ export const SaveButtonContainer = styled.div`
 `
 
 export const PlayerCardsContainer = styled.div<{ border: boolean }>`
+	width: 100%;
 	border-bottom: 1px solid
 		${({ border: b }) => (b ? '#d1d1d1' : 'transparent')};
 	max-height: 740px;
 	overflow-y: clip;
 	overflow-x: hidden;
+	@media (max-width: 992px) {
+		max-height: 100px;
+		margin-bottom: 16px;
+	}
 `
 
 export const SearchPlayerInputContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	width: 100%;
+`
+export const FloatSaveButton = styled.button`
+	background: linear-gradient(#c43583, #592880);
+	border-radius: 3px;
+	border-radius: 50px;
+	border: 1px solid #c43583;
+	bottom: 60px;
+	box-shadow: 2px 2px 3px #00000015;
+	color: white;
+	cursor: pointer;
+	font-size: 18px;
+	height: 60px;
+	padding: 8px 16px;
+	position: fixed;
+	right: 40px;
+	text-align: center;
+	text-align: center;
+	width: 60px;
+	opacity: 0;
+	z-index: 2;
+	&:hover {
+		box-shadow: inset -2px -2px 8px rgba(135, 53, 131, 1),
+			inset -2px -2px 12px rgba(135, 53, 131, 0.5),
+			inset 2px 2px 4px rgba(135, 53, 131, 0.1),
+			inset 2px 2px 8px rgba(0, 0, 0, 0.15);
+	}
+	@media (max-width: 992px) {
+		opacity: 1;
+	}
 `

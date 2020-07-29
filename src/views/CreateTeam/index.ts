@@ -4,7 +4,11 @@ import { useDispatch } from 'react-redux'
 
 import { BYPASS_CORS_PROXY } from '../../config/axios'
 import { Formation, Team } from '../../shared/interfaces/team'
-import { displayError } from '../../shared/utils/cogoToast'
+import {
+	displayError,
+	displayLoading,
+	displaySuccess
+} from '../../shared/utils/cogoToast'
 import { isValidURL } from '../../shared/utils/URL'
 import { useTypedSelector } from '../../shared/utils/useTypedSelector'
 import { Creators as TeamActions } from '../../store/ducks/teams'
@@ -12,6 +16,7 @@ import { VALID_FORMATIONS } from './data'
 import { IViewProps, ISelectOption } from './types'
 import View from './view'
 import { IPlayer } from '../../shared/interfaces/player'
+import { useDebounce } from 'use-debounce/lib'
 
 function CreateTeamContainer(): JSX.Element {
 	const dispatch = useDispatch()
@@ -28,6 +33,7 @@ function CreateTeamContainer(): JSX.Element {
 	const [availablePlayers, setAvailablePlayers] = useState<IPlayer[]>([])
 	const [selectedPlayers, setSelectedPlayers] = useState<IPlayer[]>([])
 	const [searchInput, setSearchInput] = useState('')
+	const [debouncedSearch] = useDebounce(searchInput, 500)
 	const [formation, setFormation] = useState(INITIAL_TEAM.formation)
 
 	const selectPlayer = (player: IPlayer) => {
@@ -113,6 +119,8 @@ function CreateTeamContainer(): JSX.Element {
 
 		const url = `${BYPASS_CORS_PROXY}/${endpoint}/${params}`
 
+		displayLoading('Searching players...', { hideAfter: 1 })
+
 		execute({ url })
 	}
 
@@ -120,6 +128,12 @@ function CreateTeamContainer(): JSX.Element {
 		if (!data?.api) return
 
 		const { players } = data.api
+
+		const { length: len } = players
+
+		const toast = len ? displaySuccess : displayError
+
+		toast(`${len || 'No'} players found!`)
 
 		setAvailablePlayers(players)
 	}
@@ -139,7 +153,7 @@ function CreateTeamContainer(): JSX.Element {
 		setFormation(value)
 	}
 
-	useEffect(getPlayers, [searchInput])
+	useEffect(getPlayers, [debouncedSearch])
 	useEffect(reflectFetchedPlayers, [data])
 	useEffect(removeSelectedPlayerFromAvailable, [selectedPlayers])
 

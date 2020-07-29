@@ -13,15 +13,25 @@ import {
 	faSort,
 	faSortDown,
 	faSortUp,
-	faTrash
+	faTrash,
+	faSave
 } from '@fortawesome/free-solid-svg-icons'
 
 import { axiosInstance, cacheInstance } from './config/axios'
 import Routes from './routes'
 import { persistor, store } from './store'
 import { ResetDefaultStyles } from './styles/defaults'
+import { CellToolTip } from './styles/tooltip'
 
-library.add(faSort, faSortUp, faSortDown, faPencilAlt, faTrash, faShareAlt)
+library.add(
+	faSort,
+	faSortUp,
+	faSortDown,
+	faPencilAlt,
+	faTrash,
+	faShareAlt,
+	faSave
+)
 
 /**
  * Specifies which props to inject into your component.
@@ -51,6 +61,7 @@ function App(): JSX.Element {
 							<Routes />
 						</ConfigProvider>
 					</DndProvider>
+					<CellToolTip />
 				</PersistGate>
 			</Provider>
 		</StrictMode>

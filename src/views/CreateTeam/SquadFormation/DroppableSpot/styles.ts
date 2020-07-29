@@ -3,15 +3,14 @@ import styled from 'styled-components'
 import { colors } from '../../../../styles/colors'
 
 export const AvatarContainer = styled.div`
-	z-index: 1;
-	background: ${colors.secondary};
-	display: flex;
 	align-items: center;
-	justify-content: center;
+	background: ${colors.secondary};
 	border-radius: 50%;
-	margin: 16px 0px;
-	width: 88px;
+	display: flex;
 	height: 88px;
+	justify-content: center;
+	width: 88px;
+	z-index: 1;
 `
 
 export const PlaceholderContainer = styled.div`
@@ -26,17 +25,16 @@ export const PlaceholderContainer = styled.div`
 `
 
 export const PlayerPlaceholder = styled.div`
-	background: #eeeeee80;
-	z-index: 1;
-
-	display: flex;
-	color: white;
-	box-shadow: 1px 1px 1px #00000050;
-	font-size: 24px;
-	flex-direction: column;
-	justify-content: center;
 	align-items: center;
-	height: 80px;
-	width: 80px;
+	background: #eeeeee80;
 	border-radius: 50%;
+	box-shadow: 1px 1px 1px #00000050;
+	color: white;
+	display: flex;
+	flex-direction: column;
+	font-size: 24px;
+	height: 88px;
+	justify-content: center;
+	width: 88px;
+	z-index: 1;
 `
