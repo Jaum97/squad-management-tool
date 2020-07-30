@@ -1,4 +1,11 @@
+## Venturus Developer Test
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## How to run
+
+In the project directory, you can run `npm i`, `npm run start` then go to `http://localhost:3000`
+
 
 ## Available Scripts
 
