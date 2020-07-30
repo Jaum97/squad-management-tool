@@ -1,10 +1,9 @@
 import React from 'react'
 
 import { RadioCheck, RadioInput, RadioLabel, RadioOutline } from './styles'
+import { IProps } from './types'
 
-// import IProps from './types'
-
-function RadioButton(props: any): JSX.Element {
+function RadioButton(props: IProps): JSX.Element {
 	const { checked, text, onChange } = props
 
 	const htmlFor = `radio-input-${text}`

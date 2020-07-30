@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react'
 
-import { Team, Formation } from '../../shared/interfaces/team'
 import { IPlayer } from '../../shared/interfaces/player'
+import { Formation, Team } from '../../shared/interfaces/team'
 
 export interface IInputStyledProps {
 	invalid?: boolean
@@ -13,7 +13,7 @@ export interface ISelectOption {
 }
 
 export interface IViewProps {
-	availablePlayers: any[]
+	availablePlayers: IPlayer[]
 	formation: Formation
 	formations: ISelectOption[]
 	inputsWithError: string[]
@@ -22,7 +22,7 @@ export interface IViewProps {
 	selectedPlayers: IPlayer[]
 	team: Team
 	addTag: (value: string) => void
-	handleFormationChange: (val: any) => void
+	handleFormationChange: (val: ISelectOption) => void
 	handleSearchChange: (e: ChangeEvent<HTMLInputElement>) => void
 	removeTag: (i: number) => () => void
 	saveTeam: () => void

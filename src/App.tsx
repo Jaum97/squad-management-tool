@@ -1,5 +1,5 @@
 import { configure } from 'axios-hooks'
-import React, { StrictMode } from 'react'
+import React from 'react'
 import { ConfigProvider } from 'react-avatar'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
@@ -9,19 +9,18 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
 	faPencilAlt,
+	faSave,
 	faShareAlt,
 	faSort,
 	faSortDown,
 	faSortUp,
-	faTrash,
-	faSave
+	faTrash
 } from '@fortawesome/free-solid-svg-icons'
 
 import { axiosInstance, cacheInstance } from './config/axios'
 import Routes from './routes'
 import { persistor, store } from './store'
 import { ResetDefaultStyles } from './styles/defaults'
-import { CellToolTip } from './styles/tooltip'
 
 library.add(
 	faSort,
@@ -36,7 +35,10 @@ library.add(
 /**
  * Specifies which props to inject into your component.
  */
-export function collect(connect: any, monitor: any) {
+export function collect(
+	connect: { dragSource: () => any },
+	monitor: { isDragging: () => any }
+) {
 	return {
 		// Call this function inside render()
 		// to let React DnD handle the drag events:
@@ -52,19 +54,16 @@ function App(): JSX.Element {
 	const avatarColors = ['#c9c9c9', '#c9c9c9', '#c9c9c9']
 
 	return (
-		<StrictMode>
+		<Provider store={store}>
 			<ResetDefaultStyles />
-			<Provider store={store}>
-				<PersistGate persistor={persistor}>
-					<DndProvider backend={HTML5Backend}>
-						<ConfigProvider colors={avatarColors}>
-							<Routes />
-						</ConfigProvider>
-					</DndProvider>
-					<CellToolTip />
-				</PersistGate>
-			</Provider>
-		</StrictMode>
+			<PersistGate persistor={persistor}>
+				<DndProvider backend={HTML5Backend}>
+					<ConfigProvider colors={avatarColors}>
+						<Routes />
+					</ConfigProvider>
+				</DndProvider>
+			</PersistGate>
+		</Provider>
 	)
 }
 

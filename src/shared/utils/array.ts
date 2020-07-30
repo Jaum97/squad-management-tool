@@ -1,3 +1,5 @@
+import { Maybe } from '../interfaces/common'
+
 export function mostFrequent(arr: string[]): string {
 	const { length } = arr
 
@@ -21,12 +23,24 @@ export function mostFrequent(arr: string[]): string {
 }
 
 export const leastFrequent = (arr: string[]) => {
-	const aux1 = arr.reduce(
-		(map, el) => map.set(el, (map.get(el) || 0) + 1),
-		new Map()
-	)
+	if (!arr?.length) return ''
 
-	const result = [...(aux1 as any)].reduce((r, v) => (v[1] < r[1] ? v : r))[0]
+	const map = {} as { [key: string]: number }
 
-	return result
+	// object in the format: { ID: how many this ID times it appears}
+	const mapKeysAndOcc = arr.reduce((map, el: string) => {
+		let item: Maybe<number> = map[el]
+
+		item ? (map[el] = ++item) : (map[el] = item = 1)
+
+		return map
+	}, map)
+
+	const lowestOcurrence = Math.min(...Object.values(mapKeysAndOcc))
+
+	const isLowestOcc = ([_, v]: [string, number]) => v === lowestOcurrence
+
+	const keyValue = Object.entries(mapKeysAndOcc).find(isLowestOcc)
+
+	return (keyValue || [])[0] || ''
 }

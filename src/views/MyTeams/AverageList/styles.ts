@@ -5,14 +5,14 @@ export const ListWrapper = styled.div`
 `
 
 export const ListTitle = styled.h2`
-	font-size: 18px;
 	color: #373837;
+	font-size: 18px;
 `
 
 export const ListItem = styled.div`
-	cursor: pointer;
 	background: white;
 	border-radius: 6px;
+	cursor: pointer;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -31,17 +31,17 @@ export const ListItem = styled.div`
 `
 
 export const UnorderedList = styled.div`
-	border-radius: 6px;
 	background: #e3e1e1;
+	border-radius: 6px;
 	padding: 4px;
 `
 
 export const ItemName = styled.span`
-	font-weight: 300;
 	font-size: 12px;
+	font-weight: 300;
 `
 
 export const ItemValue = styled.span`
-	font-weight: 700;
 	font-size: 12px;
+	font-weight: 700;
 `

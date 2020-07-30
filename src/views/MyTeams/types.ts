@@ -9,6 +9,7 @@ interface HighlightPlayer {
 }
 
 export interface HighLightTeam {
+	id: string
 	avgAge: string
 	name: string
 }
@@ -20,5 +21,6 @@ export interface IViewProps {
 	mostPicked: HighlightPlayer
 	teams: Team[]
 	addTeam: () => void
+	removeTeam: (teamName: string) => () => void
 	editTeam: (teamName: string) => () => void
 }

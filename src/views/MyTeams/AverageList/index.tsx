@@ -18,7 +18,7 @@ function AverageList(props: IProps): JSX.Element {
 			<ListTitle>{title}</ListTitle>
 			<UnorderedList>
 				{list.map((item, i) => (
-					<ListItem key={i} onClick={action(item.name)}>
+					<ListItem key={i} onClick={action(item.id)}>
 						<ItemName>{item.name}</ItemName>
 						<ItemValue>{item.avgAge}</ItemValue>
 					</ListItem>

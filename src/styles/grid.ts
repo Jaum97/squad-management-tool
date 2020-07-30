@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { IGridProps } from './types'
 
 export const breakPoints = {

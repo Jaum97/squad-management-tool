@@ -3,15 +3,15 @@ import styled from 'styled-components'
 import { colors } from '../../../styles/colors'
 
 export const PlayerCardContainer = styled.div`
+	align-items: center;
 	background: linear-gradient(#f9f9f9, #cccccc);
 	border-radius: 3px;
 	border: 1px dashed #cccccc;
 	display: flex;
 	flex-direction: row;
-	max-width: 100%;
-	align-items: center;
 	justify-content: space-between;
 	margin: 8px 0px;
+	max-width: 100%;
 	padding: 12px;
 	&:hover {
 		box-shadow: inset -2px -2px 8px rgba(255, 255, 255, 1),
@@ -27,10 +27,10 @@ export const CardLeftSide = styled.div`
 `
 
 export const FieldWrapper = styled.div`
+	align-items: center;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
-	align-items: center;
 `
 
 export const PlayerField = styled.span`

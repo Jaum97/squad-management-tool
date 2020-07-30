@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { IProps } from './types'
 import FormationRow from './FormationRow'
 import { TeamFormationContainer } from './styles'
+import { IProps } from './types'
 
 function SquadFormation(props: IProps) {
 	const { selectPlayer, formation, team } = props

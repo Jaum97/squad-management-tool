@@ -1,3 +1,4 @@
+import { generateSerial } from '../utils/serial'
 import { IPlayer } from './player'
 
 export type Formation = number[]
@@ -7,6 +8,7 @@ export interface ITeamPlayer extends IPlayer {
 }
 
 export class Team {
+	id: string
 	name: string
 	description: string
 	website: string
@@ -31,5 +33,6 @@ export class Team {
 		this.tags = tags
 		this.formation = formation
 		this.players = players
+		this.id = generateSerial(8)
 	}
 }

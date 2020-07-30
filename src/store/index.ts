@@ -12,6 +12,6 @@ const persistConfig = {
 
 const persistedReducer: Reducer = persistReducer(persistConfig, Reducers)
 
-//TODO: Type properly : Store<IStore>
+//TODO: Type properly: Store<IStore> ( breaks dispatch )
 export const store: any = createStore(persistedReducer)
 export const persistor: Persistor = persistStore(store)

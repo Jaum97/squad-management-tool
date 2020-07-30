@@ -1,12 +1,15 @@
-import cogoToast from 'cogo-toast'
+import cogoToast, { CTReturn } from 'cogo-toast'
 
 type ValidMethod = 'success' | 'info' | 'loading' | 'warn' | 'error'
+
+type Self<T> = T
 
 export const callToast = (method: ValidMethod) => (
 	message: string,
 	extraOpts?: {}
-) => {
-	cogoToast[method](message, { position: 'top-right', ...extraOpts })
+): CTReturn => {
+	const opts = { position: 'top-right' as 'top-right', ...extraOpts }
+	return cogoToast[method](message, opts)
 }
 
 export const displaySuccess = callToast('success')

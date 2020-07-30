@@ -1,6 +1,8 @@
+import { DragObjectWithType } from 'react-dnd'
+
+import { Maybe } from '../../../../shared/interfaces/common'
 import { IPlayer } from '../../../../shared/interfaces/player'
 import { ITeamPlayer } from '../../../../shared/interfaces/team'
-import { Maybe } from '../../../../shared/interfaces/common'
 
 export interface IProps {
 	row: number
@@ -9,3 +11,5 @@ export interface IProps {
 	editingPlayer: Maybe<ITeamPlayer>
 	selectPlayer: (player: IPlayer) => void
 }
+
+export type IDropParamType = DragObjectWithType & { player: ITeamPlayer }

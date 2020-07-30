@@ -1,4 +1,3 @@
-import ReactTooltip from 'react-tooltip'
 import styled from 'styled-components'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -44,10 +43,10 @@ export const TableCell = styled.td`
 	padding: 16px;
 `
 
-export const CellContentWrapper = styled.div`
+export const CellContentWrapper = styled.div<{ desc: boolean }>`
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: ${({ desc }) => (desc ? 'space-between' : 'flex-end')};
 `
 
 export const CellIcon = styled(FontAwesomeIcon)`

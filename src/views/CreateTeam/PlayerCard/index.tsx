@@ -3,6 +3,7 @@ import { DragSource, useDrag } from 'react-dnd'
 
 import { collect } from '../../../App'
 import { DraggableTypes } from '../../../config/dnd/types'
+import { IPlayer } from '../../../shared/interfaces/player'
 import {
 	CardLeftSide,
 	FieldLabel,
@@ -10,20 +11,19 @@ import {
 	PlayerCardContainer,
 	PlayerField
 } from './styles'
-import { IPlayer } from '../../../shared/interfaces/player'
 
 /**
  * Specifies the drag source contract.
  * Only `beginDrag` function is required.
  */
 export const cardSource = {
-	beginDrag(props: any) {
+	beginDrag(props: { id: string }) {
 		// Return the data describing the dragged item
 		const item = { id: props.id }
 		return item
 	},
 
-	endDrag(_: any, monitor: any, component: any) {
+	endDrag(_: any, monitor: { didDrop: () => any }) {
 		if (!monitor.didDrop()) return
 
 		// When dropped on a compatible target, do something
@@ -42,14 +42,10 @@ function PlayerCard(props: IPlayer & { connectDragSource: any }) {
 
 	const [, dragRef] = useDrag({
 		item: { type: DraggableTypes.CARD, player: props }
-
-		// collect: (monitor) => ({
-		// 	 opacity: monitor.isDragging() ? 0.5 : 1
-		// })
 	})
 
 	return connectDragSource(
-		<div ref={dragRef}>
+		<div title="player-card" ref={dragRef}>
 			<PlayerCardContainer>
 				<CardLeftSide>
 					<FieldWrapper>

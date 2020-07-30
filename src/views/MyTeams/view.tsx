@@ -1,6 +1,10 @@
 import React from 'react'
 import Avatar from 'react-avatar'
 
+import WhiteSection from '../../components/WhiteSection'
+import { getInitials } from '../../shared/utils/name'
+import { Column } from '../../styles/grid'
+import { CellToolTip } from '../../styles/tooltip'
 import AverageList from './AverageList'
 import {
 	AvatarContainer,
@@ -12,19 +16,16 @@ import {
 	ListContainer,
 	MPPContainer,
 	PercentageBadge,
+	Placeholder,
 	Player,
 	RightSide,
 	TeamsBody,
 	Top5Body,
 	WrapperLeft,
-	WrapperRight,
-	Placeholder
+	WrapperRight
 } from './styles'
 import TeamTable from './TeamTable'
 import { IViewProps } from './types'
-import { getInitials } from '../../shared/utils/name'
-import { Column } from '../../styles/grid'
-import WhiteSection from '../../components/WhiteSection'
 
 function MyTeams(props: IViewProps): JSX.Element {
 	const {
@@ -34,6 +35,7 @@ function MyTeams(props: IViewProps): JSX.Element {
 		mostPicked,
 		teams,
 		addTeam,
+		removeTeam,
 		editTeam
 	} = props
 
@@ -44,7 +46,11 @@ function MyTeams(props: IViewProps): JSX.Element {
 					<WhiteSection title="My teams" onClick={addTeam}>
 						<TeamsBody>
 							{teams.length ? (
-								<TeamTable teams={teams} editTeam={editTeam} />
+								<TeamTable
+									teams={teams}
+									editTeam={editTeam}
+									removeTeam={removeTeam}
+								/>
 							) : (
 								<Placeholder>
 									{"You don't have any teams yet"}
@@ -125,6 +131,7 @@ function MyTeams(props: IViewProps): JSX.Element {
 					</GradientSectionContainer>
 				</WrapperRight>
 			</Column>
+			<CellToolTip />
 		</Column>
 	)
 }

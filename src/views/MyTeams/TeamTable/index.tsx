@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { displayError, displaySuccess } from '../../../shared/utils/cogoToast'
+import { Team } from '../../../shared/interfaces/team'
+import { displayError } from '../../../shared/utils/cogoToast'
 import {
 	CellContentWrapper,
 	CellIcon,
@@ -17,7 +18,7 @@ import {
 import { IProps, ISortBy } from './types'
 
 function TeamTable(props: IProps): JSX.Element {
-	const { teams, editTeam } = props
+	const { teams, editTeam, removeTeam } = props
 
 	const DEFAULT_SORTING: ISortBy = {
 		header: 'name',
@@ -27,7 +28,7 @@ function TeamTable(props: IProps): JSX.Element {
 	const [sortBy, setSortBy] = useState(DEFAULT_SORTING)
 	const [list, setList] = useState(teams)
 
-	const sortFn = (a: any, b: any) => {
+	const sortFn = (a: Team, b: Team) => {
 		const { header, order } = sortBy
 
 		const first = order === 'asc' ? a : b
@@ -66,10 +67,12 @@ function TeamTable(props: IProps): JSX.Element {
 		displayError('Feature not yet implemented :/')
 	}
 
-	const deleteTeam = (i: number) => () => {
-		setList((l) => l.filter((_, i2) => i2 !== i))
+	const remove = (item: Team) => () => {
+		const { id } = item
 
-		displaySuccess('Team deleted successfully')
+		setList((l) => l.filter((t) => t.id !== id))
+
+		removeTeam(id)()
 	}
 
 	return (
@@ -95,11 +98,12 @@ function TeamTable(props: IProps): JSX.Element {
 					<TableBodyRow key={i}>
 						<TableCell>{item.name}</TableCell>
 						<TableCell>
-							<CellContentWrapper>
+							<CellContentWrapper
+								desc={Boolean(item.description)}>
 								{item.description}
 								<div>
 									<CellIcon
-										onClick={deleteTeam(i)}
+										onClick={remove(item)}
 										icon="trash"
 										data-tip="Delete"
 									/>
@@ -109,7 +113,7 @@ function TeamTable(props: IProps): JSX.Element {
 										data-tip="Share"
 									/>
 									<CellIcon
-										onClick={editTeam(item.name)}
+										onClick={editTeam(item.id)}
 										icon="pencil-alt"
 										data-tip="Edit"
 									/>

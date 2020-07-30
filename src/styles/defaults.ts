@@ -1,7 +1,8 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const ResetDefaultStyles = createGlobalStyle`
-html,
+html { height: 100%; overflow:auto; }
+
 body {
 	font-size: 16px;
 	height: 100%;

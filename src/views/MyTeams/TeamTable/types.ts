@@ -7,5 +7,6 @@ export interface ISortBy {
 
 export interface IProps {
 	teams: Team[]
-	editTeam: (teamName: string) => () => void
+	editTeam: (id: string) => () => void
+	removeTeam: (id: string) => () => void
 }

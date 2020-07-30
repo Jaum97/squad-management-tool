@@ -1,8 +1,19 @@
 import React from 'react'
-
-import { ImageHolder, LogoWrapper, PageHeader, Title, Wrapper } from './styles'
 import { useHistory, useLocation } from 'react-router-dom'
+
 import { routesEnum } from '../../routes/enum'
+import {
+	Container,
+	ContainerAppTitle,
+	ImageHolder,
+	LogoWrapper,
+	PageHeader,
+	Title,
+	UserAvatar,
+	UserAvatarContainer,
+	UserName,
+	Wrapper
+} from './styles'
 
 const logoSrc = require('../../assets/logo_venturus-small.png')
 
@@ -21,10 +32,18 @@ function Header(): JSX.Element {
 	return (
 		<Wrapper>
 			<PageHeader>
-				<LogoWrapper onClick={changeRoute}>
-					<ImageHolder src={logoSrc} alt="logo" />
-				</LogoWrapper>
-				<Title>{'Squad Management Tool'}</Title>
+				<ContainerAppTitle>
+					<LogoWrapper onClick={changeRoute}>
+						<ImageHolder src={logoSrc} alt="logo" />
+					</LogoWrapper>
+					<Title>{'Squad Management Tool'}</Title>
+				</ContainerAppTitle>
+				<Container>
+					<UserName>{'John Doe'}</UserName>
+					<UserAvatarContainer>
+						<UserAvatar title=" " round name="John Doe" size="56" />
+					</UserAvatarContainer>
+				</Container>
 			</PageHeader>
 		</Wrapper>
 	)

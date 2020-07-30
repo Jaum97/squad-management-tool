@@ -1,30 +1,35 @@
-import { createElement, useState, useEffect } from 'react'
+import { createElement, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import { routesEnum } from '../../routes/enum'
-import { Team, ITeamPlayer } from '../../shared/interfaces/team'
-import { useTypedSelector } from '../../shared/utils/useTypedSelector'
-import { Creators as EditTeamActions } from '../../store/ducks/teamToEdit'
-import IProps, { IViewProps, HighLightTeam } from './types'
-import View from './view'
-import { mostFrequent, leastFrequent } from '../../shared/utils/array'
-import { add } from '../../shared/utils/math'
 import { ArrayElement } from '../../shared/interfaces/common'
+import { ITeamPlayer, Team } from '../../shared/interfaces/team'
+import { leastFrequent, mostFrequent } from '../../shared/utils/array'
+import { displayError, displaySuccess } from '../../shared/utils/cogoToast'
+import { add } from '../../shared/utils/math'
+import { useTypedSelector } from '../../shared/utils/useTypedSelector'
+import { Creators as TeamActions } from '../../store/ducks/teams'
+import { Creators as EditTeamActions } from '../../store/ducks/teamToEdit'
+import IProps, { HighLightTeam, IViewProps } from './types'
+import View from './view'
 
 function MyTeamsContainer(props: IProps): JSX.Element {
 	const history = useHistory()
 	const dispatch = useDispatch()
 	const { teams } = useTypedSelector(['teams'])
 
-	const initial: HighLightTeam[] = []
+	const EMPTY_LIST: HighLightTeam[] = []
 
-	const [mostPicked, setMostPicked] = useState({ name: '', percentage: 0 })
-	const [leastPicked, setLeastPicked] = useState({ name: '', percentage: 0 })
-	const [highestAvgAgeTeams, setHighestAvgAgeTeams] = useState(initial)
-	const [lowestAvgAgeTeams, setLowestAvgAgeTeams] = useState(initial)
+	const EMPTY_PLAYER = { name: '', percentage: 0 }
+
+	const [mostPicked, setMostPicked] = useState(EMPTY_PLAYER)
+	const [leastPicked, setLeastPicked] = useState(EMPTY_PLAYER)
+	const [highestAvgAgeTeams, setHighestAvgAgeTeams] = useState(EMPTY_LIST)
+	const [lowestAvgAgeTeams, setLowestAvgAgeTeams] = useState(EMPTY_LIST)
 
 	const { setTeam: setStoreTeamToEdit } = EditTeamActions
+	const { removeTeam: removeStoreTeam } = TeamActions
 
 	const findHighLightPlayer = (
 		getWantedPlayer: (arr: string[]) => string
@@ -57,8 +62,8 @@ function MyTeamsContainer(props: IProps): JSX.Element {
 
 		const LPP = findHighLightPlayer(leastFrequent)
 
-		if (MPP) setMostPicked(MPP)
-		if (LPP) setLeastPicked(LPP)
+		setMostPicked(MPP || EMPTY_PLAYER)
+		setLeastPicked(LPP || EMPTY_PLAYER)
 	}
 
 	const getTeamAverageAge = (team: Team) => {
@@ -66,32 +71,31 @@ function MyTeamsContainer(props: IProps): JSX.Element {
 
 		const total = ages.reduce(add, 0)
 
-		return total / ages.length
+		return Number((total / ages.length).toFixed(2))
 	}
 
 	const initHighLightTeams = () => {
 		const hasPlayers = (t: Team) => t.players.length
 
 		const averages = teams.filter(hasPlayers).map((t) => ({
+			id: t.id,
 			name: t.name,
 			avgAge: getTeamAverageAge(t)
 		}))
 
-		const { length: len } = averages
+		const highestSorted = [...averages].sort((a, b) => b.avgAge - a.avgAge)
+		const lowestSorted = [...averages].sort((a, b) => a.avgAge - b.avgAge)
 
-		const highest = averages.slice(0, 5)
-		const lowest = averages.slice(len > 5 ? len - 5 : 0, len)
-
-		const highestSorted = highest.sort((a, b) => b.avgAge - a.avgAge)
-		const lowestSorted = lowest.sort((a, b) => a.avgAge - b.avgAge)
+		const highest = highestSorted.slice(0, 5)
+		const lowest = lowestSorted.slice(0, 5)
 
 		const fmt = (t: ArrayElement<typeof averages>) => ({
 			...t,
 			avgAge: t.avgAge.toFixed(1)
 		})
 
-		setHighestAvgAgeTeams(highestSorted.map(fmt))
-		setLowestAvgAgeTeams(lowestSorted.map(fmt))
+		setHighestAvgAgeTeams(highest.map(fmt))
+		setLowestAvgAgeTeams(lowest.map(fmt))
 	}
 
 	const addTeam = () => {
@@ -100,8 +104,18 @@ function MyTeamsContainer(props: IProps): JSX.Element {
 		history.push(routesEnum.CREATE_TEAM as 'CREATE_TEAM')
 	}
 
-	const editTeam = (teamName: string) => () => {
-		const team = teams.find((t) => t.name === teamName)
+	const removeTeam = (id: string) => () => {
+		const team = teams.find((t) => t.id === id)
+
+		if (!team) return displayError('Failed to delete team')
+
+		dispatch(removeStoreTeam(team))
+
+		displaySuccess('Team deleted!')
+	}
+
+	const editTeam = (id: string) => () => {
+		const team = teams.find((t) => t.id === id)
 
 		if (!team) return
 
@@ -110,8 +124,8 @@ function MyTeamsContainer(props: IProps): JSX.Element {
 		history.push(routesEnum.CREATE_TEAM as 'CREATE_TEAM')
 	}
 
-	useEffect(initHighLightPlayers, [])
-	useEffect(initHighLightTeams, [])
+	useEffect(initHighLightPlayers, [teams])
+	useEffect(initHighLightTeams, [teams])
 
 	const viewProps: IViewProps = {
 		highestAvgAgeTeams,
@@ -120,6 +134,7 @@ function MyTeamsContainer(props: IProps): JSX.Element {
 		mostPicked,
 		teams,
 		addTeam,
+		removeTeam,
 		editTeam
 	}
 

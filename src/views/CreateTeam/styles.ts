@@ -1,8 +1,9 @@
+import Select from 'react-select'
+import ReactTooltip from 'react-tooltip'
 import styled from 'styled-components'
 
 import { colors } from '../../styles/colors'
 import { IInputStyledProps } from './types'
-import Select from 'react-select'
 
 export const Wrapper = styled.div`
 	align-items: center;
@@ -44,7 +45,7 @@ export const Center = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	width: 100%;
+	/* width: 100%; */
 	@media (max-width: 560px) {
 		width: auto;
 	}
@@ -58,6 +59,9 @@ export const ColumnContainer = styled.div`
 	padding: 0px 64px;
 
 	width: 50%;
+	@media (max-width: 768px) {
+		max-width: 80%;
+	}
 	@media (max-width: 992px) {
 		width: 100%;
 	}
@@ -72,7 +76,7 @@ export const ColumnContainer = styled.div`
 `
 
 export const Title = styled.h1`
-	color: grey;
+	color: ${colors.grey};
 	font-size: 24px;
 `
 
@@ -86,6 +90,9 @@ export const InputContainer = styled.div`
 
 export const TagsContainer = styled(InputContainer)`
 	margin: 0px 0px 0px 0px;
+	@media (max-width: 992px) {
+		max-width: 100%;
+	}
 `
 
 export const TypeContainer = styled(InputContainer)`
@@ -259,4 +266,14 @@ export const FloatSaveButton = styled.button`
 	@media (max-width: 992px) {
 		opacity: 1;
 	}
+`
+
+export const PlayerTooltip = styled(ReactTooltip)`
+	background-color: white !important;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	border: 1px solid ${colors.primary} !important;
+	color: ${colors.darkGrey} !important;
+	opacity: 1 !important;
 `

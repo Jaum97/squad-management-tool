@@ -26,8 +26,8 @@ export const WrapperRight = styled(TransparentWrapper)`
 `
 
 export const TeamsBody = styled.div`
-	width: 100%;
 	padding: 16px;
+	width: 100%;
 `
 
 export const Top5Body = styled.div`
@@ -47,21 +47,21 @@ export const ListContainer = styled.div`
 `
 
 export const GradientSectionContainer = styled.div`
-	border-radius: 12px;
-	flex-direction: row;
-	display: flex;
-	width: 100%;
-	padding: 0px 16px;
 	background: linear-gradient(#c43583, #592880);
+	border-radius: 12px;
+	display: flex;
+	flex-direction: row;
+	padding: 0px 16px;
 	position: relative;
+	width: 100%;
 `
 
 export const LeftSide = styled.div`
-	width: 50%;
-	flex-direction: column;
-	display: flex;
-	justify-content: center;
 	border-right: 1px solid #949494;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 50%;
 	@media (max-width: 768px) {
 		width: 100%;
 		border-right: 1px solid transparent;
@@ -69,64 +69,60 @@ export const LeftSide = styled.div`
 `
 
 export const CircleOutline = styled.div`
-	width: 64px;
-	height: 64px;
 	border-radius: 100%;
 	border: 1px solid #949494;
+	height: 64px;
+	left: 0;
 	margin-left: auto;
 	margin-right: auto;
 	position: absolute;
-	top: 40%;
 	right: 0;
-	left: 0;
+	top: 40%;
+	width: 64px;
 	@media (max-width: 768px) {
 		opacity: 0;
 	}
 `
 
 export const RightSide = styled.div`
-	width: 50%;
 	display: flex;
 	opacity: 1;
+	width: 50%;
 	@media (max-width: 768px) {
 		display: none;
 	}
 `
 
 export const Player = styled.div`
+	align-items: flex-start;
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
 	justify-content: center;
-	position: relative;
 	margin: 40px;
+	position: relative;
 	@media (max-width: 768px) {
 		align-items: center;
 	}
 `
 
 export const AvatarContainer = styled.div`
-	background: ${colors.secondary};
-	display: flex;
 	align-items: center;
-	justify-content: center;
+	background: ${colors.secondary};
 	border-radius: 50%;
-	width: 148px;
+	display: flex;
 	height: 148px;
+	justify-content: center;
 	position: relative;
+	width: 148px;
 `
 
 export const BadgeContainer = styled.div`
 	border-bottom: 1px solid white;
+	filter: none;
 	position: absolute;
+	right: -35%;
 	top: 0;
 	width: 48px;
-	right: -35%;
-	filter: none;
-
-	/* @media (max-width: 768px) {
-		right: 25%;
-	} */
 `
 
 export const PercentageBadge = styled.span`
@@ -136,13 +132,13 @@ export const PercentageBadge = styled.span`
 `
 
 export const MPPContainer = styled.div`
-	display: flex;
 	align-items: center;
-	justify-content: center;
-	border: 2px dashed #9c9998;
 	border-radius: 50%;
 	border-width: 2px;
+	border: 2px dashed #9c9998;
+	display: flex;
 	height: 156px;
+	justify-content: center;
 	width: 156px;
 	filter: drop-shadow(10px 10px 10px #520cab)
 		drop-shadow(-10px -10px 10px #520cab);
@@ -164,5 +160,4 @@ export const Placeholder = styled.div<{ height?: number }>`
 	height: ${({ height: h }) => h || 120}px;
 	justify-content: center;
 	width: 100%;
-	/* word-wrap: break-word; */
 `

@@ -1,8 +1,12 @@
 import useAxios from 'axios-hooks'
 import { ChangeEvent, createElement, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { useDebounce } from 'use-debounce/lib'
 
-import { BYPASS_CORS_PROXY } from '../../config/axios'
+import { API, BYPASS_CORS_PROXY } from '../../config/axios'
+import { routesEnum } from '../../routes/enum'
+import { IPlayer } from '../../shared/interfaces/player'
 import { Formation, Team } from '../../shared/interfaces/team'
 import {
 	displayError,
@@ -12,21 +16,23 @@ import {
 import { isValidURL } from '../../shared/utils/URL'
 import { useTypedSelector } from '../../shared/utils/useTypedSelector'
 import { Creators as TeamActions } from '../../store/ducks/teams'
+import { Creators as TeamToEditActions } from '../../store/ducks/teamToEdit'
 import { VALID_FORMATIONS } from './data'
-import { IViewProps, ISelectOption } from './types'
+import { ISelectOption, IViewProps } from './types'
 import View from './view'
-import { IPlayer } from '../../shared/interfaces/player'
-import { useDebounce } from 'use-debounce/lib'
 
 function CreateTeamContainer(): JSX.Element {
 	const dispatch = useDispatch()
-	const { addTeam: addTeamToStore } = TeamActions
+	const history = useHistory()
 
-	const { teamToEdit } = useTypedSelector(['teamToEdit'])
+	const { setTeam: setStoreTeamToEdit } = TeamToEditActions
+	const { addTeam: addTeamToStore, updateTeam: updateStoreTeam } = TeamActions
+
+	const { teamToEdit, teams } = useTypedSelector(['teamToEdit', 'teams'])
 
 	const [{ data, loading }, execute] = useAxios('/search', { manual: true })
 
-	const INITIAL_TEAM = teamToEdit.name ? teamToEdit : new Team()
+	const INITIAL_TEAM = teamToEdit.id ? teamToEdit : new Team()
 
 	const [team, setTeam] = useState(INITIAL_TEAM)
 	const [inputsWithError, setInputsWithError] = useState<string[]>([])
@@ -39,6 +45,8 @@ function CreateTeamContainer(): JSX.Element {
 	const selectPlayer = (player: IPlayer) => {
 		setSelectedPlayers((p) => [...p, player])
 	}
+
+	console.log({ teams })
 
 	const removeSelectedPlayerFromAvailable = () => {
 		if (!selectedPlayers.length) return
@@ -77,9 +85,30 @@ function CreateTeamContainer(): JSX.Element {
 
 		if (!isTeamValid) return
 
+		const nameExists = teams.some((t) => t.name === team.name)
+
+		if (!teamToEdit.name && nameExists) {
+			displayError('There is already a team with this name')
+
+			return
+		}
+
 		const teamToSave = { ...team, players: selectedPlayers, formation }
 
-		dispatch(addTeamToStore(teamToSave))
+		const isEdit = Boolean(teamToEdit.name)
+
+		const fnToDispatch = isEdit ? updateStoreTeam : addTeamToStore
+
+		console.log({ teamToSave, fnToDispatch })
+
+		dispatch(fnToDispatch(teamToSave))
+
+		displaySuccess(`Team ${isEdit ? 'updated' : 'created'}!`)
+
+		setTimeout(() => history.push(routesEnum.MY_TEAMS), 500)
+
+		setStoreTeamToEdit(new Team())
+		setTeam(new Team())
 	}
 
 	const validateTeam = () => {
@@ -113,15 +142,13 @@ function CreateTeamContainer(): JSX.Element {
 	const getPlayers = () => {
 		if (searchInput.length < 4) return
 
-		const endpoint = `https://www.api-football.com/demo/v2`
-
 		const params = `players/search/${searchInput}`
 
-		const url = `${BYPASS_CORS_PROXY}/${endpoint}/${params}`
+		const url = `${BYPASS_CORS_PROXY}/${API}/${params}`
 
-		displayLoading('Searching players...', { hideAfter: 1 })
+		const { hide } = displayLoading('Searching players...')
 
-		execute({ url })
+		execute({ url }).then(hide)
 	}
 
 	const reflectFetchedPlayers = () => {

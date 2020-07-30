@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { useLinearGradient } from '../../shared/utils/styles'
 import { colors } from '../../styles/colors'
 

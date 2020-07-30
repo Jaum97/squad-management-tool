@@ -6,7 +6,7 @@ import { IStyledSpanExtraProps } from './types'
 
 export const RadioLabel = styled.label`
 	cursor: pointer;
-	color: grey;
+	color: ${colors.grey};
 	display: flex;
 	font-size: 16px;
 	align-items: center;
@@ -17,7 +17,7 @@ export const RadioOutline = styled.span`
 	width: 16px;
 	height: 16px;
 	border-radius: 50%;
-	border: 1px solid #949494;
+	border: 1px solid ${colors.grey};
 	display: block;
 	margin-right: 8px;
 	transition: all 0.4s;

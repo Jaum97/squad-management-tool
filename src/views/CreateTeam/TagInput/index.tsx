@@ -8,8 +8,9 @@ import {
 	InputTagList,
 	InputTagListItem
 } from './styles'
+import { IProps } from './types'
 
-function InputTag(props: any) {
+function InputTag(props: IProps) {
 	const { tags, removeTag, addTag } = props
 
 	let inputRef = useRef()
@@ -17,8 +18,6 @@ function InputTag(props: any) {
 	const inputKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
 		const { key } = e
 		const { value } = e.target as any
-
-		// const valid = value.replace(/;/gi, '')
 
 		const wantsToAdd = (key === 'Enter' || key === ';') && value
 
@@ -43,7 +42,7 @@ function InputTag(props: any) {
 	return (
 		<InputTagContainer>
 			<InputTagList>
-				{tags.map((tag: any, i: number) => (
+				{tags.map((tag, i: number) => (
 					<InputTagListItem key={i}>
 						{tag}
 						<InputTagButton onClick={removeTag(i)}>
@@ -54,7 +53,7 @@ function InputTag(props: any) {
 				<InputTagInputContainer>
 					<InputTagInput
 						ref={inputRef as any}
-						onKeyDown={inputKeyDown as any}
+						onKeyDown={inputKeyDown}
 					/>
 				</InputTagInputContainer>
 			</InputTagList>

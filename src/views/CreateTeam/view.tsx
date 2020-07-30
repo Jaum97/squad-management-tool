@@ -1,42 +1,41 @@
 import React from 'react'
 
-import RadioButton from '../../components/RadioButton'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import RadioButton from '../../components/RadioButton'
+import WhiteSection from '../../components/WhiteSection'
+import { Formation } from '../../shared/interfaces/team'
 // TODO: Share across pages
 import { Content, Placeholder } from '../MyTeams/styles'
-
 import PlayerCard from './PlayerCard'
 import SquadFormation from './SquadFormation'
 import {
+	Center,
 	ColumnContainer,
+	FloatSaveButton,
+	FormationSelect,
+	FormationSelectContainer,
 	Input,
 	InputContainer,
 	InputTitle,
+	PlayerCardsContainer,
+	PlayerTooltip,
 	RadioButtonsContainer,
 	SaveButton,
+	SaveButtonContainer,
+	SearchPlayerInputContainer,
+	SelectTitle,
 	Spacer,
+	SquadInfoContainer,
 	TagsContainer,
+	TeamInfoContainer,
 	Textarea,
 	Title,
 	TypeContainer,
-	Wrapper,
-	FormationSelectContainer,
-	SelectTitle,
-	FormationSelect,
-	SaveButtonContainer,
-	PlayerCardsContainer,
-	SearchPlayerInputContainer,
-	Center,
-	FloatSaveButton,
-	SquadInfoContainer,
-	TeamInfoContainer
+	Wrapper
 } from './styles'
 import InputTag from './TagInput'
-import { IViewProps, ISelectOption } from './types'
-import { Formation } from '../../shared/interfaces/team'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-import WhiteSection from '../../components/WhiteSection'
+import { ISelectOption, IViewProps } from './types'
 
 function CreateTeam(props: IViewProps): JSX.Element {
 	const {
@@ -71,7 +70,9 @@ function CreateTeam(props: IViewProps): JSX.Element {
 
 	const { length } = searchInput
 
-	const placeholderMessage = length >= 4 ? messageSearch : messageEmpty
+	const messageIfNotLoading = length >= 4 ? messageSearch : messageEmpty
+
+	const placeholderMessage = loading ? 'loading...' : messageIfNotLoading
 
 	return (
 		<Content>
@@ -155,6 +156,7 @@ function CreateTeam(props: IViewProps): JSX.Element {
 							<FormationSelectContainer>
 								<SelectTitle>{'Formation'}</SelectTitle>
 								<FormationSelect
+									data-testid="formation-select"
 									onChange={handleFormationChange}
 									options={formations}
 									value={getFormationOption(formation)}
@@ -190,19 +192,18 @@ function CreateTeam(props: IViewProps): JSX.Element {
 									))
 								) : (
 									<Placeholder>
-										{loading
-											? 'loading...'
-											: placeholderMessage}
+										{placeholderMessage}
 									</Placeholder>
 								)}
 							</PlayerCardsContainer>
 						</ColumnContainer>
 					</SquadInfoContainer>
 				</WhiteSection>
-				<FloatSaveButton>
+				<FloatSaveButton onClick={saveTeam}>
 					<FontAwesomeIcon icon="save" />
 				</FloatSaveButton>
 			</Wrapper>
+			<PlayerTooltip id="player-tooltip" />
 		</Content>
 	)
 }

@@ -1,8 +1,9 @@
 import React from 'react'
+
+import { ITeamPlayer } from '../../../../shared/interfaces/team'
 import { FormationSectionContainer } from '../../styles'
 import DroppableSpot from '../DroppableSpot'
 import { IProps } from './types'
-import { ITeamPlayer } from '../../../../shared/interfaces/team'
 
 function FormationRow(props: IProps) {
 	const { length, selectPlayer, row, formation, players } = props
