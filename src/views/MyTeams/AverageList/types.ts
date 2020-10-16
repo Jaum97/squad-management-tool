@@ -1,4 +1,4 @@
-import { HighLightTeam } from '../types'
+import { HighLightTeam } from '../types';
 
 export interface IProps {
 	title: string

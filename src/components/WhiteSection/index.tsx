@@ -1,13 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 import {
-	AddTeamButton,
-	SectionContainer,
-	SectionHeader,
-	SectionTitle,
-	TeamButtonText
-} from './styles'
-import { IProps } from './types'
+    AddTeamButton, SectionContainer, SectionHeader, SectionTitle, TeamButtonText
+} from './styles';
+import { IProps } from './types';
 
 function WhiteSection(props: IProps) {
 	const { title, children, onClick } = props

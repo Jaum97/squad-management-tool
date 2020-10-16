@@ -1,5 +1,5 @@
-import Axios from 'axios'
-import LRU from 'lru-cache'
+import Axios from 'axios';
+import LRU from 'lru-cache';
 
 export const BYPASS_CORS_PROXY = 'https://cors-anywhere.herokuapp.com'
 

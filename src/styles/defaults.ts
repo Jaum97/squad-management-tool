@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
 export const ResetDefaultStyles = createGlobalStyle`
 html { height: 100%; overflow:auto; }

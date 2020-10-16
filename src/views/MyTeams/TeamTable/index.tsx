@@ -1,21 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Team } from '../../../shared/interfaces/team'
-import { displayError } from '../../../shared/utils/cogoToast'
+import { Team } from '../../../shared/interfaces/team';
+import { displayError } from '../../../shared/utils/cogoToast';
 import {
-	CellContentWrapper,
-	CellIcon,
-	HeaderContentWrapper,
-	TableBody,
-	TableBodyRow,
-	TableCell,
-	TableHeader,
-	TableHeaderRow,
-	TableWrapper
-} from './styles'
-import { IProps, ISortBy } from './types'
+    CellContentWrapper, CellIcon, HeaderContentWrapper, TableBody, TableBodyRow, TableCell,
+    TableHeader, TableHeaderRow, TableWrapper
+} from './styles';
+import { IProps, ISortBy } from './types';
 
 function TeamTable(props: IProps): JSX.Element {
 	const { teams, editTeam, removeTeam } = props

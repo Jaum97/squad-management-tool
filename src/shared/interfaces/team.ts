@@ -1,5 +1,5 @@
-import { generateSerial } from '../utils/serial'
-import { IPlayer } from './player'
+import { generateSerial } from '../utils/serial';
+import { IPlayer } from './player';
 
 export type Formation = number[]
 

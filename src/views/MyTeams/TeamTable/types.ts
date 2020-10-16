@@ -1,4 +1,4 @@
-import { Team } from '../../../shared/interfaces/team'
+import { Team } from '../../../shared/interfaces/team';
 
 export interface ISortBy {
 	header: 'name' | 'description'

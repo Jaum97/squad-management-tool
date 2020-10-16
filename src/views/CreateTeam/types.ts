@@ -1,7 +1,7 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent } from 'react';
 
-import { IPlayer } from '../../shared/interfaces/player'
-import { Formation, Team } from '../../shared/interfaces/team'
+import { IPlayer } from '../../shared/interfaces/player';
+import { Formation, Team } from '../../shared/interfaces/team';
 
 export interface IInputStyledProps {
 	invalid?: boolean

@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-import { colors } from '../../styles/colors'
-import { Row } from '../../styles/grid'
+import { colors } from '../../styles/colors';
+import { Row } from '../../styles/grid';
 
 export const Content = styled(Row)`
 	justify-content: center;
@@ -47,7 +47,7 @@ export const ListContainer = styled.div`
 `
 
 export const GradientSectionContainer = styled.div`
-	background: linear-gradient(#c43583, #592880);
+	background: linear-gradient(#3f8bb4, #357587);
 	border-radius: 12px;
 	display: flex;
 	flex-direction: row;
@@ -140,8 +140,8 @@ export const MPPContainer = styled.div`
 	height: 156px;
 	justify-content: center;
 	width: 156px;
-	filter: drop-shadow(10px 10px 10px #520cab)
-		drop-shadow(-10px -10px 10px #520cab);
+	filter: drop-shadow(10px 10px 10px #0c4eab)
+		drop-shadow(-10px -10px 10px #0c4eab);
 `
 
 export const AvatarTitle = styled.span`

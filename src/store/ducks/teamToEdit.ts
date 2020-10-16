@@ -1,6 +1,6 @@
-import { createActions, createReducer } from 'reduxsauce'
+import { createActions, createReducer } from 'reduxsauce';
 
-import { Team } from '../../shared/interfaces/team'
+import { Team } from '../../shared/interfaces/team';
 
 const INITIAL_STATE = new Team()
 

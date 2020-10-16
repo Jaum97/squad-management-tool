@@ -1,4 +1,4 @@
-import { ValidPropType } from '../interfaces/common'
+import { ValidPropType } from '../interfaces/common';
 
 export const pickKeys = <K extends ValidPropType>(keys: Array<K>) => <
 	O extends { [key in K]?: any }

@@ -1,4 +1,16 @@
 import useAxios from 'axios-hooks'
+import {
+	append,
+	complement,
+	eqProps,
+	evolve,
+	filter,
+	flip,
+	includes,
+	mergeRight,
+	pipe,
+	prop
+} from 'ramda'
 import { ChangeEvent, createElement, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -21,6 +33,10 @@ import { VALID_FORMATIONS } from './data'
 import { ISelectOption, IViewProps } from './types'
 import View from './view'
 
+const overlook = <T>(fn: T) => fn as any
+
+const pipeableFilter = (callback: any) => <T>(a: T[]): T[] => a.filter(callback)
+
 function CreateTeamContainer(): JSX.Element {
 	const dispatch = useDispatch()
 	const history = useHistory()
@@ -42,18 +58,18 @@ function CreateTeamContainer(): JSX.Element {
 	const [debouncedSearch] = useDebounce(searchInput, 500)
 	const [formation, setFormation] = useState(INITIAL_TEAM.formation)
 
-	const selectPlayer = (player: IPlayer) => {
-		setSelectedPlayers((p) => [...p, player])
-	}
+	const selectPlayer = pipe(append, setSelectedPlayers)
 
-	console.log({ teams })
+	const pickId = prop('player_id')
 
 	const removeSelectedPlayerFromAvailable = () => {
 		if (!selectedPlayers.length) return
 
-		const ids = selectedPlayers.map((p) => p.player_id)
+		const ids = selectedPlayers.map(pickId)
 
-		setAvailablePlayers((a) => a.filter((p) => !ids.includes(p.player_id)))
+		const isIdSelected = pipe(overlook(pickId), flip(includes)(ids))
+
+		setAvailablePlayers(filter(complement(isIdSelected)))
 	}
 
 	const updateTeam = (key: string) => (
@@ -61,23 +77,23 @@ function CreateTeamContainer(): JSX.Element {
 	) => {
 		const { value } = e.target
 
-		if (key === 'type') {
-			const isFantasy = team.type === 'fantasy'
+		const isKey = key === 'type'
 
-			setTeam((t) => ({ ...t, type: isFantasy ? 'real' : 'fantasy' }))
+		const payload = isKey ? { type: value.toLowerCase() } : { [key]: value }
 
-			return
-		}
-
-		setTeam((t) => ({ ...t, [key]: value }))
+		setTeam(mergeRight(payload))
 	}
 
 	const removeTag = (i: number) => () => {
-		setTeam((t) => ({ ...t, tags: t.tags.filter((_, i2) => i2 !== i) }))
+		const transforms = {
+			tags: pipeableFilter((_: any, i2: any) => i2 !== i)
+		}
+
+		setTeam(overlook(evolve)(transforms))
 	}
 
 	const addTag = (value: string) => {
-		setTeam((t) => ({ ...t, tags: [...t.tags, value] }))
+		setTeam(overlook(evolve)({ tags: append(value) }))
 	}
 
 	const saveTeam = () => {
@@ -85,21 +101,17 @@ function CreateTeamContainer(): JSX.Element {
 
 		if (!isTeamValid) return
 
-		const nameExists = teams.some((t) => t.name === team.name)
+		const nameExists = teams.some(eqProps('name', team))
 
-		if (!teamToEdit.name && nameExists) {
-			displayError('There is already a team with this name')
+		const errMessage = 'There is already a team with this name'
 
-			return
-		}
+		if (!teamToEdit.name && nameExists) void displayError(errMessage)
 
 		const teamToSave = { ...team, players: selectedPlayers, formation }
 
 		const isEdit = Boolean(teamToEdit.name)
 
 		const fnToDispatch = isEdit ? updateStoreTeam : addTeamToStore
-
-		console.log({ teamToSave, fnToDispatch })
 
 		dispatch(fnToDispatch(teamToSave))
 
@@ -123,9 +135,9 @@ function CreateTeamContainer(): JSX.Element {
 
 		const hasErrors = Boolean(withError.length)
 
-		if (hasErrors) {
-			displayError('Failed to save team, please check highlighted inputs')
-		}
+		const errMess = 'Failed to save team, please check highlighted inputs'
+
+		if (hasErrors) void displayError(errMess)
 
 		setInputsWithError(withError)
 
@@ -175,7 +187,7 @@ function CreateTeamContainer(): JSX.Element {
 		const { value } = opt
 
 		setSelectedPlayers([])
-		setTeam((t) => ({ ...t, players: [] }))
+		setTeam(mergeRight({ players: [] }))
 
 		setFormation(value)
 	}

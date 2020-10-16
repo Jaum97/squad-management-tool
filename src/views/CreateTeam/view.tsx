@@ -2,11 +2,11 @@ import React from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import RadioButton from '../../components/RadioButton'
-import WhiteSection from '../../components/WhiteSection'
+import { RadioButton, WhiteSection } from '../../components'
 import { Formation } from '../../shared/interfaces/team'
 // TODO: Share across pages
 import { Content, Placeholder } from '../MyTeams/styles'
+import { CreateTeamContext } from './context'
 import PlayerCard from './PlayerCard'
 import SquadFormation from './SquadFormation'
 import {
@@ -127,14 +127,16 @@ function CreateTeam(props: IViewProps): JSX.Element {
 									<RadioButton
 										checked={team.type === 'real'}
 										onChange={updateTeam('type')}
-										text="Real"
+										text="real"
 									/>
 									<Spacer />
 									<RadioButton
 										checked={team.type === 'fantasy'}
 										onChange={updateTeam('type')}
-										text="Fantasy"
+										text="fantasy"
 									/>
+									<Spacer />
+									
 								</RadioButtonsContainer>
 							</TypeContainer>
 
@@ -163,11 +165,13 @@ function CreateTeam(props: IViewProps): JSX.Element {
 								/>
 							</FormationSelectContainer>
 							<FormationSelectContainer>
-								<SquadFormation
-									team={team}
-									formation={formation}
-									selectPlayer={selectPlayer}
-								/>
+								<CreateTeamContext.Provider
+									value={selectPlayer}>
+									<SquadFormation
+										team={team}
+										formation={formation}
+									/>
+								</CreateTeamContext.Provider>
 							</FormationSelectContainer>
 							<SaveButtonContainer>
 								<SaveButton onClick={saveTeam}>

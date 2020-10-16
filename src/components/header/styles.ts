@@ -1,8 +1,8 @@
-import Avatar from 'react-avatar'
-import styled from 'styled-components'
+import Avatar from 'react-avatar';
+import styled from 'styled-components';
 
-import { useLinearGradient } from '../../shared/utils/styles'
-import { colors } from '../../styles/colors'
+import { useLinearGradient } from '../../shared/utils/styles';
+import { colors } from '../../styles/colors';
 
 export const Wrapper = styled.header`
 	background: ${useLinearGradient(colors.secondary + ' 75%', colors.primary)};

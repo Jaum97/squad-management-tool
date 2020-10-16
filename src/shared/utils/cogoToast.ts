@@ -1,4 +1,4 @@
-import cogoToast, { CTReturn } from 'cogo-toast'
+import cogoToast, { CTReturn } from 'cogo-toast';
 
 type ValidMethod = 'success' | 'info' | 'loading' | 'warn' | 'error'
 

@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-import { IGridProps } from './types'
+import { IGridProps } from './types';
 
 export const breakPoints = {
 	sm: 768,

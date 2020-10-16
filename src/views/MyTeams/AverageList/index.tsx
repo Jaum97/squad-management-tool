@@ -1,14 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-import {
-	ItemName,
-	ItemValue,
-	ListItem,
-	ListTitle,
-	ListWrapper,
-	UnorderedList
-} from './styles'
-import { IProps } from './types'
+import { ItemName, ItemValue, ListItem, ListTitle, ListWrapper, UnorderedList } from './styles';
+import { IProps } from './types';
 
 function AverageList(props: IProps): JSX.Element {
 	const { title, list, action } = props

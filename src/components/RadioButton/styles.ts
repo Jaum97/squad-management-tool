@@ -1,8 +1,8 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-import { useLinearGradient } from '../../shared/utils/styles'
-import { colors } from '../../styles/colors'
-import { IStyledSpanExtraProps } from './types'
+import { useLinearGradient } from '../../shared/utils/styles';
+import { colors } from '../../styles/colors';
+import { IStyledSpanExtraProps } from './types';
 
 export const RadioLabel = styled.label`
 	cursor: pointer;

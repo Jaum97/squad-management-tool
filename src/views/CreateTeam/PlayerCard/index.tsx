@@ -1,16 +1,10 @@
-import React from 'react'
-import { DragSource, useDrag } from 'react-dnd'
+import React from 'react';
+import { DragSource, useDrag } from 'react-dnd';
 
-import { collect } from '../../../App'
-import { DraggableTypes } from '../../../config/dnd/types'
-import { IPlayer } from '../../../shared/interfaces/player'
-import {
-	CardLeftSide,
-	FieldLabel,
-	FieldWrapper,
-	PlayerCardContainer,
-	PlayerField
-} from './styles'
+import { collect } from '../../../App';
+import { DraggableTypes } from '../../../config/dnd/types';
+import { IPlayer } from '../../../shared/interfaces/player';
+import { CardLeftSide, FieldLabel, FieldWrapper, PlayerCardContainer, PlayerField } from './styles';
 
 /**
  * Specifies the drag source contract.

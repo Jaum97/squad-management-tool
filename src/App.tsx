@@ -1,26 +1,20 @@
-import { configure } from 'axios-hooks'
-import React from 'react'
-import { ConfigProvider } from 'react-avatar'
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
+import { configure } from 'axios-hooks';
+import React from 'react';
+import { ConfigProvider } from 'react-avatar';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import { library } from '@fortawesome/fontawesome-svg-core'
+import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-	faPencilAlt,
-	faSave,
-	faShareAlt,
-	faSort,
-	faSortDown,
-	faSortUp,
-	faTrash
-} from '@fortawesome/free-solid-svg-icons'
+    faPencilAlt, faSave, faShareAlt, faSort, faSortDown, faSortUp, faTrash
+} from '@fortawesome/free-solid-svg-icons';
 
-import { axiosInstance, cacheInstance } from './config/axios'
-import Routes from './routes'
-import { persistor, store } from './store'
-import { ResetDefaultStyles } from './styles/defaults'
+import { axiosInstance, cacheInstance } from './config/axios';
+import Routes from './routes';
+import { persistor, store } from './store';
+import { ResetDefaultStyles } from './styles/defaults';
 
 library.add(
 	faSort,

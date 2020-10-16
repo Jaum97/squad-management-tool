@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const ListWrapper = styled.div`
 	margin: 0px 16px;

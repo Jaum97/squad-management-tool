@@ -1,8 +1,8 @@
-import { combineReducers, Reducer, ReducersMapObject } from 'redux'
+import { combineReducers, Reducer, ReducersMapObject } from 'redux';
 
-import { IStore } from '../types'
-import teams from './teams'
-import teamToEdit from './teamToEdit'
+import { IStore } from '../types';
+import teams from './teams';
+import teamToEdit from './teamToEdit';
 
 const reducers: ReducersMapObject<IStore> = {
 	teams,

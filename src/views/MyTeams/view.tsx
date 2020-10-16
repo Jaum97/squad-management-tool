@@ -1,31 +1,18 @@
-import React from 'react'
-import Avatar from 'react-avatar'
+import React from 'react';
+import Avatar from 'react-avatar';
 
-import WhiteSection from '../../components/WhiteSection'
-import { getInitials } from '../../shared/utils/name'
-import { Column } from '../../styles/grid'
-import { CellToolTip } from '../../styles/tooltip'
-import AverageList from './AverageList'
+import { WhiteSection } from '../../components';
+import { getInitials } from '../../shared/utils/name';
+import { Column } from '../../styles/grid';
+import { CellToolTip } from '../../styles/tooltip';
+import AverageList from './AverageList';
 import {
-	AvatarContainer,
-	AvatarTitle,
-	BadgeContainer,
-	CircleOutline,
-	GradientSectionContainer,
-	LeftSide,
-	ListContainer,
-	MPPContainer,
-	PercentageBadge,
-	Placeholder,
-	Player,
-	RightSide,
-	TeamsBody,
-	Top5Body,
-	WrapperLeft,
-	WrapperRight
-} from './styles'
-import TeamTable from './TeamTable'
-import { IViewProps } from './types'
+    AvatarContainer, AvatarTitle, BadgeContainer, CircleOutline, GradientSectionContainer, LeftSide,
+    ListContainer, MPPContainer, PercentageBadge, Placeholder, Player, RightSide, TeamsBody,
+    Top5Body, WrapperLeft, WrapperRight
+} from './styles';
+import TeamTable from './TeamTable';
+import { IViewProps } from './types';
 
 function MyTeams(props: IViewProps): JSX.Element {
 	const {

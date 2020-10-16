@@ -1,8 +1,8 @@
-import { createStore, Reducer } from 'redux'
-import { Persistor, persistReducer, persistStore } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+import { createStore, Reducer } from 'redux';
+import { Persistor, persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-import { Reducers } from './ducks'
+import { Reducers } from './ducks';
 
 const persistConfig = {
 	key: 'Squad Management Tool Venturus',

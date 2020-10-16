@@ -1,5 +1,5 @@
-import { routesEnum } from '../../routes/enum'
-import { Team } from '../../shared/interfaces/team'
+import { routesEnum } from '../../routes/enum';
+import { Team } from '../../shared/interfaces/team';
 
 export default interface IProps {}
 

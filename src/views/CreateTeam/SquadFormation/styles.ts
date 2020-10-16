@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-import { GradientSectionContainer } from '../../MyTeams/styles'
+import { GradientSectionContainer } from '../../MyTeams/styles';
 
 export const TeamFormationContainer = styled(GradientSectionContainer)`
 	flex-direction: column;

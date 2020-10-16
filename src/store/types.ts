@@ -1,5 +1,5 @@
-import { Maybe } from '../shared/interfaces/common'
-import { Team } from '../shared/interfaces/team'
+import { Maybe } from '../shared/interfaces/common';
+import { Team } from '../shared/interfaces/team';
 
 export interface IStore {
 	teams: Team[]

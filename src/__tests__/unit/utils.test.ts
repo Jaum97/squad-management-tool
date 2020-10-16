@@ -1,4 +1,4 @@
-import { leastFrequent, mostFrequent } from '../../shared/utils/array'
+import { leastFrequent, mostFrequent } from '../../shared/utils/array';
 
 describe('App Utils', () => {
 	describe('mostFrequent', () => {

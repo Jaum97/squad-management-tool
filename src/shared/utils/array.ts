@@ -1,4 +1,4 @@
-import { Maybe } from '../interfaces/common'
+import { Maybe } from '../interfaces/common';
 
 export function mostFrequent(arr: string[]): string {
 	const { length } = arr

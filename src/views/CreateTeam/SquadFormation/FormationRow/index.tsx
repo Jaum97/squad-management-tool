@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-import { ITeamPlayer } from '../../../../shared/interfaces/team'
-import { FormationSectionContainer } from '../../styles'
-import DroppableSpot from '../DroppableSpot'
-import { IProps } from './types'
+import { ITeamPlayer } from '../../../../shared/interfaces/team';
+import { FormationSectionContainer } from '../../styles';
+import DroppableSpot from '../DroppableSpot';
+import { IProps } from './types';
 
 function FormationRow(props: IProps) {
-	const { length, selectPlayer, row, formation, players } = props
+	const { length, row, formation, players } = props
 
 	const arr = Array(length).fill(0)
 
@@ -25,7 +25,7 @@ function FormationRow(props: IProps) {
 	// when editing this finds the player position inside the team
 	const findPlayer = (col: number) => players.find(isSamePosition(col))
 
-	const spotParams = { row, selectPlayer, formation }
+	const spotParams = { row, formation }
 
 	return (
 		<FormationSectionContainer>

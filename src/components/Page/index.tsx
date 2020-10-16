@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react'
+import React, { Fragment } from 'react';
 
-import Header from '../header'
-import { Footer, Main } from './styles'
+import Header from '../header';
+import { Footer, Main } from './styles';
 
 function Page({ children }: { children: JSX.Element }) {
 	return (

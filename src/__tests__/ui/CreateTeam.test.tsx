@@ -1,9 +1,9 @@
-import { createMemoryHistory } from 'history'
-import React from 'react'
+import { createMemoryHistory } from 'history';
+import React from 'react';
 
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react';
 
-import App from '../../App'
+import App from '../../App';
 
 describe('Create Team Page', () => {
 	const check = (el: HTMLElement) => expect(el).toBeInTheDocument()

@@ -1,9 +1,9 @@
-import React from 'react'
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
+import React from 'react';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
-import Page from '../components/Page'
-import { routesData } from './data'
-import { routesEnum } from './enum'
+import { Page } from '../components';
+import { routesData } from './data';
+import { routesEnum } from './enum';
 
 function Routes(): JSX.Element {
 	return (

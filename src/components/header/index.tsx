@@ -1,21 +1,13 @@
-import React from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import React from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 
-import { routesEnum } from '../../routes/enum'
+import { routesEnum } from '../../routes/enum';
 import {
-	Container,
-	ContainerAppTitle,
-	ImageHolder,
-	LogoWrapper,
-	PageHeader,
-	Title,
-	UserAvatar,
-	UserAvatarContainer,
-	UserName,
-	Wrapper
-} from './styles'
+    Container, ContainerAppTitle, ImageHolder, LogoWrapper, PageHeader, Title, UserAvatar,
+    UserAvatarContainer, UserName, Wrapper
+} from './styles';
 
-const logoSrc = require('../../assets/logo_venturus-small.png')
+const logoSrc = require('../../assets/logo_squad_small.png')
 
 function Header(): JSX.Element {
 	const history = useHistory()

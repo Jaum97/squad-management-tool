@@ -1,4 +1,4 @@
-import { Nullable } from './common'
+import { Nullable } from './common';
 
 export interface IPlayer {
 	age: number

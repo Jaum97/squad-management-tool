@@ -1,9 +1,9 @@
-import Select from 'react-select'
-import ReactTooltip from 'react-tooltip'
-import styled from 'styled-components'
+import Select from 'react-select';
+import ReactTooltip from 'react-tooltip';
+import styled from 'styled-components';
 
-import { colors } from '../../styles/colors'
-import { IInputStyledProps } from './types'
+import { colors } from '../../styles/colors';
+import { IInputStyledProps } from './types';
 
 export const Wrapper = styled.div`
 	align-items: center;
@@ -178,17 +178,17 @@ export const CenterFormationSectionContainer = styled(
 export const SaveButton = styled.button`
 	width: 100%;
 	border-radius: 3px;
-	border: 1px solid #c43583;
-	background: linear-gradient(#c43583, #592880);
+	border: 1px solid ;
+	background: linear-gradient(#3f8bb4, #357587);
 	color: white;
 	text-align: center;
 	font-size: 18px;
 	padding: 8px 16px;
 	cursor: pointer;
 	&:hover {
-		box-shadow: inset -2px -2px 8px rgba(135, 53, 131, 1),
-			inset -2px -2px 12px rgba(135, 53, 131, 0.5),
-			inset 2px 2px 4px rgba(135, 53, 131, 0.1),
+		box-shadow: inset -2px -2px 8px #3f8bb490,
+			inset -2px -2px 12px #3f8bb440,
+			inset 2px 2px 4px #3f8bb410,
 			inset 2px 2px 8px rgba(0, 0, 0, 0.15);
 	}
 	@media (max-width: 992px) {
@@ -239,10 +239,10 @@ export const SearchPlayerInputContainer = styled.div`
 	width: 100%;
 `
 export const FloatSaveButton = styled.button`
-	background: linear-gradient(#c43583, #592880);
+	background: linear-gradient(#3f8bb4, #357587);
 	border-radius: 3px;
 	border-radius: 50px;
-	border: 1px solid #c43583;
+	border: 1px solid #3f8bb4;
 	bottom: 60px;
 	box-shadow: 2px 2px 3px #00000015;
 	color: white;
@@ -258,9 +258,9 @@ export const FloatSaveButton = styled.button`
 	opacity: 0;
 	z-index: 2;
 	&:hover {
-		box-shadow: inset -2px -2px 8px rgba(135, 53, 131, 1),
-			inset -2px -2px 12px rgba(135, 53, 131, 0.5),
-			inset 2px 2px 4px rgba(135, 53, 131, 0.1),
+		box-shadow: inset -2px -2px 8px #3f8bb490,
+			inset -2px -2px 12px #3f8bb440,
+			inset 2px 2px 4px #3f8bb410,
 			inset 2px 2px 8px rgba(0, 0, 0, 0.15);
 	}
 	@media (max-width: 992px) {

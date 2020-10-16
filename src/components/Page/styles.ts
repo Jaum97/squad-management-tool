@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-import { colors } from '../../styles/colors'
+import { colors } from '../../styles/colors';
 
 export const Main = styled.main`
 	bottom: 40px;

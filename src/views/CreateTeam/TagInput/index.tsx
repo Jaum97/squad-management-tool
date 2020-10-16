@@ -1,14 +1,10 @@
-import React, { KeyboardEvent, useRef } from 'react'
+import React, { KeyboardEvent, useRef } from 'react';
 
 import {
-	InputTagButton,
-	InputTagContainer,
-	InputTagInput,
-	InputTagInputContainer,
-	InputTagList,
-	InputTagListItem
-} from './styles'
-import { IProps } from './types'
+    InputTagButton, InputTagContainer, InputTagInput, InputTagInputContainer, InputTagList,
+    InputTagListItem
+} from './styles';
+import { IProps } from './types';
 
 function InputTag(props: IProps) {
 	const { tags, removeTag, addTag } = props

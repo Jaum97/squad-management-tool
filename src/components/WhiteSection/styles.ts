@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-import { useLinearGradient } from '../../shared/utils/styles'
-import { colors } from '../../styles/colors'
+import { useLinearGradient } from '../../shared/utils/styles';
+import { colors } from '../../styles/colors';
 
 export const SectionContainer = styled.div`
 	align-items: center;
@@ -27,7 +27,7 @@ export const SectionHeader = styled.div`
 `
 
 export const SectionTitle = styled.h1`
-	color: #470e8f;
+	color: #0e598f;
 	font-size: 24px;
 	padding-bottom: 16px;
 	font-weight: 700;

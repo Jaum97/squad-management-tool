@@ -11,9 +11,9 @@ function RadioButton(props: IProps): JSX.Element {
 	const inputProps = {
 		checked,
 		id: htmlFor,
-		onChange,
+		onClick: onChange as any,
 		type: 'radio',
-		value: ''
+		value: text
 	}
 
 	return (

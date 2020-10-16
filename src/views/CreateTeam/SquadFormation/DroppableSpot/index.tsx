@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import Avatar from 'react-avatar'
-import { useDrop } from 'react-dnd'
+import React, { useContext, useEffect, useState } from 'react';
+import Avatar from 'react-avatar';
+import { useDrop } from 'react-dnd';
 
-import { DraggableTypes } from '../../../../config/dnd/types'
-import { getInitials } from '../../../../shared/utils/name'
-import {
-	AvatarContainer,
-	PlaceholderContainer,
-	PlayerPlaceholder
-} from './styles'
-import { IDropParamType, IProps } from './types'
+import { DraggableTypes } from '../../../../config/dnd/types';
+import { getInitials } from '../../../../shared/utils/name';
+import { CreateTeamContext } from '../../context';
+import { AvatarContainer, PlaceholderContainer, PlayerPlaceholder } from './styles';
+import { IDropParamType, IProps } from './types';
 
 function DroppableSpot(props: IProps) {
-	const { selectPlayer, row, col, formation, editingPlayer } = props
+	const { row, col, formation, editingPlayer } = props
+
+	const selectPlayer = useContext(CreateTeamContext)
 
 	const position = [row, col]
 
@@ -28,7 +27,7 @@ function DroppableSpot(props: IProps) {
 			const teamPlayer = { ...player, position }
 
 			setDroppedPlayer(teamPlayer)
-			selectPlayer(teamPlayer)
+			selectPlayer?.(teamPlayer)
 		},
 		collect: (monitor) => ({
 			isOver: !!monitor.isOver(),

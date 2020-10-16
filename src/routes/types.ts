@@ -1,4 +1,4 @@
-import { Maybe } from '../shared/interfaces/common'
+import { Maybe } from '../shared/interfaces/common';
 
 export interface IRouteData {
 	children: JSX.Element

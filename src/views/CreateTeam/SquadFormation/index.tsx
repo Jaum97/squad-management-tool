@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-import FormationRow from './FormationRow'
-import { TeamFormationContainer } from './styles'
-import { IProps } from './types'
+import FormationRow from './FormationRow';
+import { TeamFormationContainer } from './styles';
+import { IProps } from './types';
 
 function SquadFormation(props: IProps) {
-	const { selectPlayer, formation, team } = props
+	const { formation, team } = props
 
 	const { players } = team
 
@@ -21,7 +21,7 @@ function SquadFormation(props: IProps) {
 
 	const goalKeeper = 1
 
-	const rowParams = { selectPlayer, formation, players }
+	const rowParams = { formation, players }
 
 	return (
 		<TeamFormationContainer>

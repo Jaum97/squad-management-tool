@@ -1,8 +1,8 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { colors } from '../../../styles/colors'
+import { colors } from '../../../styles/colors';
 
 export const TableWrapper = styled.table`
 	border-collapse: collapse;
@@ -58,12 +58,12 @@ export const CellIcon = styled(FontAwesomeIcon)`
 
 export const TableBodyRow = styled.tr`
 	&:hover {
-		background: #e2c1d390;
+		background: #c1dfe290;
 		border-radius: 8px;
 
 		${TableCell} {
 			border-bottom: 1px solid transparent;
-			color: #b04c8a;
+			color: #4c99b0;
 			&:first-child {
 				border-radius: 6px 0px 0px 6px;
 			}

@@ -1,4 +1,4 @@
-import { Formation } from '../../shared/interfaces/team'
+import { Formation } from '../../shared/interfaces/team';
 
 // TODO: Make it work for 4 position formations
 export const VALID_FORMATIONS: Formation[] = [
