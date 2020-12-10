@@ -1,10 +1,11 @@
+import { equals, path, pipe, prop } from 'ramda';
 import { createElement, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { routesEnum } from '../../routes/enum';
 import { ArrayElement } from '../../shared/interfaces/common';
-import { ITeamPlayer, Team } from '../../shared/interfaces/team';
+import { Team } from '../../shared/interfaces/team';
 import { leastFrequent, mostFrequent } from '../../shared/utils/array';
 import { displayError, displaySuccess } from '../../shared/utils/cogoToast';
 import { add } from '../../shared/utils/math';
@@ -32,24 +33,24 @@ function MyTeamsContainer(
 	const { setTeam: setStoreTeamToEdit } = EditTeamActions
 	const { removeTeam: removeStoreTeam } = TeamActions
 
+	const getPlayerId = pipe(prop('player_id') as any, String)
+
 	const findHighLightPlayer = (
 		getWantedPlayer: (arr: string[]) => string
 	) => {
 		if (!teams?.length) return
-
-		const getPlayerId = (p: ITeamPlayer) => String(p.player_id)
-
-		const allPlayers = teams.flatMap((t) => t.players)
+		
+		const allPlayers = teams.flatMap(prop('players'))
 
 		const allPlayerIds = allPlayers.map(getPlayerId)
 
 		const id = getWantedPlayer(allPlayerIds)
 
-		const appearances = allPlayerIds.filter((p) => p === id).length
+		const appearances = allPlayerIds.filter(equals(id)).length
 
 		const percentage = Math.floor(100 / (allPlayerIds.length / appearances))
 
-		const isHighlighted = (p: ITeamPlayer) => String(p.player_id) === id
+		const isHighlighted = pipe(getPlayerId, equals(id))
 
 		const player = allPlayers.find(isHighlighted)
 
@@ -68,21 +69,23 @@ function MyTeamsContainer(
 	}
 
 	const getTeamAverageAge = (team: Team) => {
-		const ages = team.players.map((p) => p.age)
+		const ages = team.players.map(prop('age'))
 
 		const total = ages.reduce(add, 0)
 
 		return Number((total / ages.length).toFixed(2))
 	}
 
-	const initHighLightTeams = () => {
-		const hasPlayers = (t: Team) => t.players.length
+	const fmtPlayerAvg = (t: Team) => ({
+		id: t.id,
+		name: t.name,
+		avgAge: getTeamAverageAge(t)
+	})
 
-		const averages = teams.filter(hasPlayers).map((t) => ({
-			id: t.id,
-			name: t.name,
-			avgAge: getTeamAverageAge(t)
-		}))
+	const initHighLightTeams = () => {
+		const hasPlayers = pipe(path(['players', 'length']), Boolean)
+
+		const averages = teams.filter(hasPlayers).map(fmtPlayerAvg)
 
 		const highestSorted = [...averages].sort((a, b) => b.avgAge - a.avgAge)
 		const lowestSorted = [...averages].sort((a, b) => a.avgAge - b.avgAge)
@@ -105,8 +108,10 @@ function MyTeamsContainer(
 		history.push(routesEnum.CREATE_TEAM as 'CREATE_TEAM')
 	}
 
+	const findTeam = (id: string) => pipe(prop('id') as any, equals(id))
+
 	const removeTeam = (id: string) => () => {
-		const team = teams.find((t) => t.id === id)
+		const team = teams.find(findTeam(id))
 
 		if (!team) return displayError('Failed to delete team')
 
@@ -116,7 +121,7 @@ function MyTeamsContainer(
 	}
 
 	const editTeam = (id: string) => () => {
-		const team = teams.find((t) => t.id === id)
+		const team = teams.find(findTeam(id))
 
 		if (!team) return
 
