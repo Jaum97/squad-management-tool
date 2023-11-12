@@ -10,7 +10,7 @@
 		"@testing-library/react": "^9.5.0",
 		"@testing-library/user-event": "^7.2.1",
 		"@types/react-select": "^3.0.14",
-		"axios": "^0.21.1",
+		"axios": "^1.6.0",
 		"axios-hooks": "^2.1.0",
 		"cogo-toast": "^4.2.3",
 		"create-react-index": "^1.0.2",
